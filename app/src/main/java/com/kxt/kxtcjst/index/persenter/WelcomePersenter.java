@@ -70,6 +70,7 @@ public class WelcomePersenter extends CommunalPresenter<IWelcomeView> {
                 @Override
                 public void onCallback(UpdateBean data) {
                     super.onCallback(data);
+                    KLog.json(JSON.toJSONString(data));
                     if (null != data && data.getStatus().equals("1")) {
                         if (!"".equals(data.getData().getDownloadUrl())) {
                             //显示更新
@@ -121,11 +122,13 @@ public class WelcomePersenter extends CommunalPresenter<IWelcomeView> {
                 @Override
                 public void onError(String error) {
                     super.onError(error);
+                    KLog.d("mView.toMainActivity  error");
                     mView.toMainActivity();
                 }
             }, map, UrlConstant.AD_CONFIG_URL);
         } catch (Exception e) {
             e.printStackTrace();
+            KLog.d("mView.toMainActivity  Exception");
             mView.toMainActivity();
         }
         getUpdateMsg();
