@@ -1,6 +1,7 @@
 package com.kxt.kxtcjst.index.persenter;
 
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.common.base.CommunalPresenter;
@@ -12,6 +13,7 @@ import com.kxt.kxtcjst.index.jsonBean.ConfigJson;
 import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
 import com.kxt.kxtcjst.index.model.IWelcomeModelImp;
 import com.kxt.kxtcjst.index.view.IWelcomeView;
+import com.socks.library.KLog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,14 +102,18 @@ public class WelcomePersenter extends CommunalPresenter<IWelcomeView> {
                 @Override
                 public void onCallback(AdConfigBean data) {
                     super.onCallback(data);
+                    KLog.json(JSON.toJSONString(data));
                     if (null != data && data.getStatus().equals("1")) {
                         if (data.getData().getAdvertisement().getType().equals("normal")) {
                             mView.showAd(data);
+                            KLog.d("mView.showAd");
                         } else {
                             mView.toMainActivity();
+                            KLog.d("mView.toMainActivity");
                         }
                         CjstApplicaion.getInstance().setAdConfigBean(data);
                     } else {
+                        KLog.d("mView.toMainActivity   no  1");
                         mView.toMainActivity();
                     }
                 }

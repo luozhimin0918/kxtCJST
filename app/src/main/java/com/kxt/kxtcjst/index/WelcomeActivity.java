@@ -20,6 +20,7 @@ import com.kxt.kxtcjst.common.utils.BaseUtils;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
 import com.kxt.kxtcjst.index.persenter.WelcomePersenter;
 import com.kxt.kxtcjst.index.view.IWelcomeView;
+import com.socks.library.KLog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,10 +45,12 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+                    KLog.d("handleMessage 0");
                     Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                     startActivity(intent);
                     break;
                 case 1:
+                    KLog.d("handleMessage 1");
                     handler.removeMessages(0);
                     relativeWelcome.setVisibility(View.VISIBLE);
                     Glide.with(getContext())
@@ -73,7 +76,6 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
         setBindingView(R.layout.activity_welcome, false);
         persenter = new WelcomePersenter();
         persenter.attach(this);
-
         if (BaseUtils.isNetworkConnected(this)) {
             persenter.getAdConfig();
         } else {
@@ -86,6 +88,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
 
     @Override
     public void toMainActivity() {
+        KLog.d("toMainActivity");
         welcomeRoot.setBackgroundResource(R.mipmap.welcome);
         handler.sendEmptyMessageDelayed(0, 1000);
 
@@ -93,6 +96,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
 
     @Override
     public void showAd(AdConfigBean adConfigBean) {
+        KLog.d("showAd");
         this.adConfigBean = adConfigBean;
         welcomeRoot.setBackgroundResource(R.mipmap.welcome_ad);
         handler.sendEmptyMessage(1);
@@ -115,6 +119,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
 
     @Override
     public void onBackPressed() {
+        KLog.d("onBackPressed");
         super.onBackPressed();
         handler.removeMessages(0);
         handler.removeMessages(1);

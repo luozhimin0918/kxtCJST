@@ -7,6 +7,7 @@ import com.bumptech.glide.MemoryCategory;
 import com.kxt.kxtcjst.common.utils.CrashHandler;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
 import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
+import com.socks.library.KLog;
 
 /**
  * Created by Administrator on 2017/3/29.
@@ -43,8 +44,9 @@ public class CjstApplicaion extends Application {
         super.onCreate();
         this.cjstApplicaion = this;
         Glide.get(getApplicationContext()).setMemoryCategory(MemoryCategory.LOW);
-        CrashHandler crashHandler = new CrashHandler();
-        crashHandler.init(getApplicationContext());
+//        CrashHandler crashHandler = new CrashHandler();
+//        crashHandler.init(getApplicationContext());
+        KLog.init(BuildConfig.LOG_DEBUG);
     }
 
 }

@@ -116,12 +116,12 @@
         "source": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_dialog_material_background_light.xml"
     },
     {
-        "merged": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\default_ptr_flip.png",
-        "source": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\default_ptr_flip.png"
-    },
-    {
         "merged": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
         "source": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\default_ptr_flip.png",
+        "source": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\default_ptr_flip.png"
     },
     {
         "merged": "E:\\AndroidStudioGit\\kxtCJST\\publiclibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\error_circle.xml",
