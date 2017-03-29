@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BrowserThemeDefault" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#FF323A45</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
 </resources>
