@@ -22,7 +22,8 @@
         android:name=".CjstApplicaion"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".index.WelcomeActivity">
+        <activity android:name=".index.WelcomeActivity"
+            android:theme="@style/Theme.Start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
