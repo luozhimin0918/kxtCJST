@@ -26,4 +26,11 @@
         <item name="android:windowShowWallpaper">false</item>
         <item name="android:windowActionBar">false</item>
     </style>
+
+
+
+    <style name="popwindow_register_animation">
+        <item name="android:windowEnterAnimation">@anim/popwindwo_register_animation_in</item>
+        <item name="android:windowExitAnimation">@anim/popwindwo_register_animation_out</item>
+    </style>
 </resources>
