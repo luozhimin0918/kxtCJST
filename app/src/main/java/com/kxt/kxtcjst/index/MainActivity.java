@@ -1,10 +1,12 @@
 package com.kxt.kxtcjst.index;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
+import com.flyco.tablayout.CommonTabLayout;
 import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
@@ -23,12 +25,20 @@ public class MainActivity extends CommunalActivity  implements IMainView{
     private boolean isShow = false;
     @BindView(R.id.filter_img)
     RelativeLayout filterIcon;
+    @BindView(R.id.tab_main)
+    CommonTabLayout tabMain;
+    @BindView(R.id.view_pager)
+    ViewPager viewpagerMain;
+
+    private String[] mTitles = {"推荐", "财经视听", "财经汇"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setBindingView(R.layout.activity_main);
         mainPersenter=new MainPersenter();
         mainPersenter.attach(this);
+        mainPersenter.initTabs(tabMain,mTitles);
+        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
     }
 
 

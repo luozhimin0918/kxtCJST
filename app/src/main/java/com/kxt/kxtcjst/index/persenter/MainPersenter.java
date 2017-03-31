@@ -1,8 +1,12 @@
 package com.kxt.kxtcjst.index.persenter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,17 +15,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalPresenter;
 import com.kxt.kxtcjst.common.coustom.LoadWebView;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
 import com.kxt.kxtcjst.common.utils.PopupWindowUtils;
+import com.kxt.kxtcjst.common.utils.ViewFindUtils;
 import com.kxt.kxtcjst.index.DetailsActivity;
+import com.kxt.kxtcjst.index.adapter.MainPagerAdapter;
+import com.kxt.kxtcjst.index.entity.TabEntity;
+import com.kxt.kxtcjst.index.fragment.VideoDataFragment;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
 import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
 import com.kxt.kxtcjst.index.view.IMainView;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +44,12 @@ import java.util.regex.Pattern;
 public class MainPersenter extends CommunalPresenter<IMainView>  implements View.OnClickListener  {
     public PopupWindowUtils popupWindowUtils;
     private String adUrl;
+    private CommonTabLayout tabMain;
+    private ArrayList<CustomTabEntity> mTabs = new ArrayList<>();
+    private ViewPager viewpagerMain;
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private View mDecorView;
+    private String[] mTitles;
     public  MainPersenter(){
         popupWindowUtils=new PopupWindowUtils();
     }
@@ -181,5 +199,83 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
 
             return true;
         }
+    }
+
+    /**
+     * 初始化顶部tab
+     *
+     * @param tabMain
+     */
+    public void initTabs(final CommonTabLayout tabMain,String[] mTitles) {
+        this.tabMain=tabMain;
+        this.mTitles=mTitles;
+        for (int i = 0; i < mTitles.length; i++) {
+            mTabs.add(new TabEntity(mTitles[i]));
+        }
+        tabMain.setTabData(mTabs);
+
+        tabMain.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+
+                tabMain.setCurrentTab(position);
+//                DateBean dateBean = dateBeans.get(lastTabLayout);
+//                dateBean.setLastTab(lastTab);
+//                mView.onTabChanged(dateBean);
+                viewpagerMain.setCurrentItem(position);
+
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 初始化viewpager
+     *
+     * @param viewpagerMain
+     * @param fragmentManager
+     */
+    public void initViewPager(ViewPager viewpagerMain, FragmentManager fragmentManager) {
+        this.viewpagerMain = viewpagerMain;
+        mFragments.add(new VideoDataFragment());
+        mFragments.add(new VideoDataFragment());
+        mFragments.add(new VideoDataFragment());
+        mDecorView = ((Activity) getContext()).getWindow().getDecorView();
+
+        viewpagerMain = ViewFindUtils.find(mDecorView, R.id.view_pager);
+        viewpagerMain.setOffscreenPageLimit(2);
+        viewpagerMain.setAdapter(new MainPagerAdapter(fragmentManager, mTitles, mFragments));
+
+        viewpagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tabMain.setCurrentTab(position);
+               /* if (position != 0) {
+                    flitdataImg.setVisibility(View.INVISIBLE);
+                } else {
+                    flitdataImg.setVisibility(View.VISIBLE);
+                }
+                DateBean dateBean = dateBeans.get(lastTabLayout);
+                dateBean.setLastTab(position);
+                mView.onTabChanged(dateBean);*/
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        viewpagerMain.setCurrentItem(0);
     }
 }
