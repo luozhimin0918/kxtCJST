@@ -77,7 +77,7 @@ public class VideoAdapter extends BaseAdapter {
             e.getMessage();
             viewHolder.sp_timelong.setText("");
         }
-
+        viewHolder.sp_img.setImageDrawable(context.getResources().getDrawable(R.drawable.empty_photo_jiu_big));
         Glide.with(context)
                 .load(dataBeans.get(position).getPicture())
                 .asBitmap()
