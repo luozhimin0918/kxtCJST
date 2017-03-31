@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalFragment;
+import com.kxt.kxtcjst.common.utils.BaseUtils;
 import com.kxt.kxtcjst.index.persenter.VideoDataPersenter;
 import com.kxt.kxtcjst.index.view.IVideoDataView;
 import com.library.util.volley.load.PageLoadLayout;
@@ -57,6 +58,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
         }*/
         videoDataPersenter = new VideoDataPersenter();
         videoDataPersenter.attach(this);
+        pageLoad.startLoading();
         videoDataPersenter.getVideoData(dataListview, pageLoad,tagId);
         KLog.d("tag===="+tagId);
         init();
@@ -89,6 +91,12 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
     @Override
     public void OnAfreshLoad() {
 //        pageLoad.startLoading();//TODO: 请求失败之后要显示圈圈了
+        if (!BaseUtils.isNetworkConnected(getContext())) {
+            pageLoad.loadError("亲，网络出错了！");
+        }else{
+            videoDataPersenter.getVideoData(dataListview, pageLoad,tagId);
+        }
+
 //        cjrlDataPersenter.getDataList(dataListview, pageLoad, dateBean);
     }
 
