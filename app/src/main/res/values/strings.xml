@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">财经视听</string>
+    <string name="no_video_data">亲，暂无数据！</string>
 </resources>

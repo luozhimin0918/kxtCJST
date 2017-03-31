@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalFragment;
+import com.kxt.kxtcjst.index.persenter.VideoDataPersenter;
 import com.kxt.kxtcjst.index.view.IVideoDataView;
 import com.library.util.volley.load.PageLoadLayout;
 import com.library.widget.handmark.PullToRefreshBase;
@@ -35,7 +36,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
 //
 //    }
 
-//    private CjrlDataPersenter cjrlDataPersenter;
+    private VideoDataPersenter videoDataPersenter;
 
     @Override
     protected void onInitialize(Bundle savedInstanceState) {
@@ -49,8 +50,8 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
        /* if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }*/
-    /*    cjrlDataPersenter = new CjrlDataPersenter();
-        cjrlDataPersenter.attach(this);*/
+        videoDataPersenter = new VideoDataPersenter();
+        videoDataPersenter.attach(this);
         init();
     }
 
@@ -64,7 +65,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
                 dataListview.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        cjrlDataPersenter.getDataList(dataListview, pageLoad, dateBean);
+                        videoDataPersenter.getVideoData(dataListview, pageLoad);
                     }
                 }, 200);
             }
@@ -106,7 +107,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
     public void onDestroy() {
         super.onDestroy();
 
-        EventBus.getDefault().unregister(this);
+      /*  EventBus.getDefault().unregister(this);*/
     }
 
 

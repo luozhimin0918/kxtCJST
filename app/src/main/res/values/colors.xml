@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="text_title">#2e3239</color>
     <color name="line_bg">#ededed</color>
+    <color name="video_text_color">#B8C4CC</color>
 </resources>

@@ -12,6 +12,6 @@ public class UrlConstant {
     public static final String UPDATE_MSG_URL = BASE_URL + "app/pkx/version";//更新信息
     public static final String AD_CONFIG_URL = BASE_URL + "app/pkx/config";//广告信息
 //    public static final String NEWS_AD_URL = BASE_URL + "pkx/ywSlide";//要闻头部广告
-//    public static final String NEWS_DATA_URL = BASE_URL + "pkx/ywList";//要闻
+    public static final String VIDEO_DATA_URL_ITEM = "http://appapi.kxt.com/Video/list_video?cid=141&num=10";//&markid=476
     public static final String URL_PRIVATE_KEY = "kuaixun56pslui*!@~^jhk";
 }
