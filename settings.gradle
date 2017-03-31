@@ -1,1 +1,1 @@
-include ':app', ':publiclibrary', ':kloglibrary', ':FlycoTabLayout_Lib'
+include ':app', ':publiclibrary', ':kloglibrary', ':FlycoTabLayout_Lib', ':ijkplayerlibrary', ':superplayerlibrary'

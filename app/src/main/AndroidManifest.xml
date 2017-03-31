@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kxt.kxtcjst">
 
     <uses-sdk android:minSdkVersion="15"></uses-sdk>
@@ -17,6 +18,7 @@
 
     <application
         android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:name=".CjstApplicaion"
@@ -41,6 +43,13 @@
         <activity
             android:name=".index.MainActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".index.SuperPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensor">
+        </activity>
     </application>
 
 </manifest>

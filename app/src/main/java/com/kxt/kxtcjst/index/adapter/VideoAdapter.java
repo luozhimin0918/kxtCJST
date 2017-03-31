@@ -17,6 +17,7 @@ import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.constant.SpConstant;
 import com.kxt.kxtcjst.common.coustom.MyTabView;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
+import com.kxt.kxtcjst.index.SuperPlayerActivity;
 import com.kxt.kxtcjst.index.jsonBean.VedioBean;
 
 import java.util.ArrayList;
@@ -103,6 +104,9 @@ public class VideoAdapter extends BaseAdapter {
         viewHolder.item_video_root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, SuperPlayerActivity.class);
+                intent.putExtra("id", dataBeans.get(position).getId());
+                context.startActivity(intent);
               /*  SpConstant.getReadPreferences().edit().putString(dataBeans.get(position).getId(), dataBeans.get(position).getId()).commit();
                 viewHolder.newTitle.setTextColor(context.getResources().getColor(R.color.font_bb2));
                 Intent intent = new Intent(context, DetailsActivity.class);
