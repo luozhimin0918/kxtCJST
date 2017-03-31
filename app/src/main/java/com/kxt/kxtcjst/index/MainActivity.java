@@ -9,8 +9,11 @@ import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
+import com.kxt.kxtcjst.common.utils.DoubleClickUtils;
 import com.kxt.kxtcjst.index.persenter.MainPersenter;
 import com.kxt.kxtcjst.index.view.IMainView;
+import com.library.manager.ActivityManager;
+import com.library.widget.window.ToastView;
 import com.socks.library.KLog;
 
 import butterknife.BindView;
@@ -28,6 +31,16 @@ public class MainActivity extends CommunalActivity  implements IMainView{
         mainPersenter.attach(this);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (!DoubleClickUtils.isFastDoubleClick(2000)) {
+            ToastView.makeText3(this, "再按一次退出");
+        } else {
+            ActivityManager.getInstance().finishAllActivity();
+            super.onBackPressed();
+        }
+    }
     @Override
     public void ShowAdPopView() {
         if (CjstApplicaion.getInstance().getAdConfigBean() != null) {
