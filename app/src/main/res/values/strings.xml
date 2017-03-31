@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">财经视听</string>
     <string name="no_video_data">亲，暂无数据！</string>
+    <string name="load_nonet">亲，网络出错了！</string>
+    <string name="load_err">亲，数据加载出错了！</string>
 </resources>

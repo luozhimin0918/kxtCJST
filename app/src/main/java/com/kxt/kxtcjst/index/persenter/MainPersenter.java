@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -34,6 +35,7 @@ import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
 import com.kxt.kxtcjst.index.view.IMainView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +52,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private View mDecorView;
     private String[] mTitles;
+    private List<String> mTitlesID=new ArrayList<>();
     public  MainPersenter(){
         popupWindowUtils=new PopupWindowUtils();
     }
@@ -242,9 +245,21 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      */
     public void initViewPager(ViewPager viewpagerMain, FragmentManager fragmentManager) {
         this.viewpagerMain = viewpagerMain;
+        mTitlesID.add(0,new String("139"));
+        mTitlesID.add(1,new String("135"));
+        mTitlesID.add(2,new String("141"));
+
+       /* mFragments.add(new VideoDataFragment());
         mFragments.add(new VideoDataFragment());
-        mFragments.add(new VideoDataFragment());
-        mFragments.add(new VideoDataFragment());
+        mFragments.add(new VideoDataFragment());*/
+        for(int m=0;m<mTitlesID.size();m++){
+            Bundle data = new Bundle();
+            data.putString("tagId", mTitlesID.get(m));
+            VideoDataFragment videoDataFragment = new VideoDataFragment();
+            videoDataFragment.setArguments(data);
+            mFragments.add(videoDataFragment);
+        }
+
         mDecorView = ((Activity) getContext()).getWindow().getDecorView();
 
         viewpagerMain = ViewFindUtils.find(mDecorView, R.id.view_pager);

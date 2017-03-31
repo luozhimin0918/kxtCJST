@@ -18,6 +18,7 @@ import com.kxt.kxtcjst.index.view.IVideoDataView;
 import com.library.util.volley.VolleyHttpUtil2;
 import com.library.util.volley.load.PageLoadLayout;
 import com.library.widget.handmark.PullToRefreshListView;
+import com.library.widget.window.ToastView;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -49,14 +50,14 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
      * 获取视频的数据
      *
      */
-    public void getVideoData(final PullToRefreshListView dataListview, final PageLoadLayout pageLoad) {
+    public void getVideoData(final PullToRefreshListView dataListview, final PageLoadLayout pageLoad,String  tagId) {
         if (!BaseUtils.isNetworkConnected(getContext())) {
             dataListview.onRefreshComplete();
             pageLoad.loadError("亲，网络出错了！");
             return;
         }
         Map<String, String> map = new HashMap<>();
-        String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+        String url = UrlConstant.VIDEO_DATA_URL_ITEM+tagId;
         ConfigJson dataJson = new ConfigJson();
         Gson gson = new Gson();
         try {
@@ -88,7 +89,7 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
 
                         } else {
 //                            CjrlApplication.getInstance().setAddValues(null);
-                            pageLoad.loadError("亲，数据加载出错了！");
+                            pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
                         }
                     }
                 }
@@ -98,86 +99,76 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                     super.onError(error);
 //                    CjrlApplication.getInstance().setAddValues(null);
                     if (error.equals(VolleyHttpUtil2.ERROR_NOT_NETWORK)) {
-                        pageLoad.loadError("亲，网络出错了！");
+                        pageLoad.loadError(getContext().getResources().getString(R.string.load_nonet));
                     } else {
-                        pageLoad.loadError("亲，数据加载出错了！");
+                        pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
 
                     }
                 }
             }, map, url);
         } catch (Exception e) {
             e.printStackTrace();
-            pageLoad.loadError("亲，数据加载出错了！");
+            pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
         }
     }
 
     /**
      * 获取假期的数据
      * @param dataListview
-     * @param pageLoad
-     * @param dateBean
      */
-    /*public void getJqList(final PullToRefreshListView dataListview, final PageLoadLayout pageLoad, DateBean dateBean) {
-        if (!BaseUtils.isNetworkConnected(getContext())) {
-            dataListview.onRefreshComplete();
-            pageLoad.loadError("亲，网络出错了！");
-            return;
-        }
-        Map<String, String> map = new HashMap<>();
-        String url = UrlConstant.GET_JQ_URL;
-        String value = dateBean.getYear() + "-" + dateBean.getMonthNum() + "-" + dateBean.getDay();
-        DataJson dataJson = new DataJson(value);
-        Gson gson = new Gson();
-        try {
-            map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
-            dataModelImp.getDateListData(new ObserverData<CjrlDataBean>() {
-                @Override
-                public void onCallback(final CjrlDataBean data) {
-                    super.onCallback(data);
-                    if (null != data) {
-                        dataListview.onRefreshComplete();
-                        if (data.getStatus().equals("1")) {
-                            if (null != data.getData() && data.getData().size() > 0) {
-                                //数据获取成功
-                                dataListview.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        lastData = (ArrayList<CjrlDataBean.DataBean>) data.getData();
-                                        pageLoad.loadSuccess();
-                                        jqListAdapter = new JqListAdapter(getContext(), lastData);
-                                        dataListview.setAdapter(jqListAdapter);
-                                        jqListAdapter.notifyDataSetChanged();
-                                    }
-                                });
-                            } else {
-                                pageLoad.loadNoData(getContext().getResources().getString(R.string.no_jq));
-                                CjrlApplication.getInstance().setAddValues(null);
+    public void getMoreNewsData( final PullToRefreshListView dataListview,String tagId) {
+        if (BaseUtils.isNetworkConnected(getContext())) {
+            try {
+                final Map<String, String> map = new HashMap<>();
+                Gson gson = new Gson();
+                String url = UrlConstant.VIDEO_DATA_URL_ITEM+tagId;
+                if(lastData!=null&&lastData.size()>5){
+                    url+="&markid="+lastData.get(lastData.size()-1).getId();
+                }
+//                NewsMoreJson newsMoreJson = new NewsMoreJson();
+//                newsMoreJson.setNum("15");
+//                newsMoreJson.setMarkid(newsDataBeans.get(newsDataBeans.size() - 1).getId());
+                map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(new ConfigJson())));
+                dataModelImp.getDateListData(new ObserverData<VedioBean>() {
+                    @Override
+                    public void onCallback(VedioBean data) {
+                        super.onCallback(data);
+                        if (null != data && data.getCode()==200) {
+                            List<VedioBean.DataBean> databeas = data.getData();
+                            KLog.json("videoDataPersenter More",JSON.toJSONString(data));
+                            if(databeas!=null&&databeas.size()>0){
+                                lastData.addAll(databeas);
+                                videoAdapter.notifyDataSetChanged();
                             }
 
+                            dataListview.onRefreshComplete();
+                            if(databeas==null||databeas.size()==0){
+                                ToastView.makeText3(getContext(), "没有更多数据了");
+                            }
                         } else {
-                            CjrlApplication.getInstance().setAddValues(null);
-                            pageLoad.loadError("亲，数据加载出错了！");
+                            dataListview.onRefreshComplete();
+                            ToastView.makeText3(getContext(), getContext().getResources().getString(R.string.load_err));
                         }
                     }
-                }
-
+                }, map, url);
+            } catch (Exception e) {
+                e.printStackTrace();
+                dataListview.onRefreshComplete();
+                ToastView.makeText3(getContext(), getContext().getResources().getString(R.string.load_err));
+            }
+        } else {
+            dataListview.postDelayed(new Runnable() {
                 @Override
-                public void onError(final String error) {
-                    super.onError(error);
-                    CjrlApplication.getInstance().setAddValues(null);
-                    if (error.equals(VolleyHttpUtil2.ERROR_NOT_NETWORK)) {
-                        pageLoad.loadError("亲，网络出错了！");
-                    } else {
-                        pageLoad.loadError("亲，数据加载出错了！");
-
-                    }
+                public void run() {
+                    dataListview.onRefreshComplete();
                 }
-            }, map, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-            pageLoad.loadError("亲，数据加载出错了！");
+            }, 200);
+
+            ToastView.makeText3(getContext(), getContext().getResources().getString(R.string.load_nonet));
         }
-    }*/
+
+
+    }
 
     /**
      * 获取日历数据

@@ -12,6 +12,7 @@ import com.kxt.kxtcjst.index.view.IVideoDataView;
 import com.library.util.volley.load.PageLoadLayout;
 import com.library.widget.handmark.PullToRefreshBase;
 import com.library.widget.handmark.PullToRefreshListView;
+import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,12 +38,16 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
 //    }
 
     private VideoDataPersenter videoDataPersenter;
-
+    private String tagId;
     @Override
     protected void onInitialize(Bundle savedInstanceState) {
         setBindingView(R.layout.video_data_fragment);
 
         super.onInitialize(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        tagId = bundle.getString("tagId", "0");
+
 
         dataListview = (PullToRefreshListView) replaceLayout.findViewById(R.id.data_listview);
         pageLoad = (PageLoadLayout) replaceLayout.findViewById(R.id.page_load);
@@ -52,12 +57,14 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
         }*/
         videoDataPersenter = new VideoDataPersenter();
         videoDataPersenter.attach(this);
+        videoDataPersenter.getVideoData(dataListview, pageLoad,tagId);
+        KLog.d("tag===="+tagId);
         init();
     }
 
 
     public void init() {
-        dataListview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        dataListview.setMode(PullToRefreshBase.Mode.BOTH);
         dataListview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -65,13 +72,15 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
                 dataListview.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        videoDataPersenter.getVideoData(dataListview, pageLoad);
+                        KLog.d("pullto_____tag===="+tagId);
+                        videoDataPersenter.getVideoData(dataListview, pageLoad,tagId);
                     }
                 }, 200);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                videoDataPersenter.getMoreNewsData(dataListview,tagId);
             }
         });
     }
@@ -79,7 +88,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
 
     @Override
     public void OnAfreshLoad() {
-        pageLoad.startLoading();//TODO: 请求失败之后要显示圈圈了
+//        pageLoad.startLoading();//TODO: 请求失败之后要显示圈圈了
 //        cjrlDataPersenter.getDataList(dataListview, pageLoad, dateBean);
     }
 
