@@ -2,7 +2,7 @@ package com.kxt.kxtcjst.index.model;
 
 
 import com.kxt.kxtcjst.common.utils.ObserverData;
-import com.kxt.kxtcjst.index.jsonBean.VedioBean;
+import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
 
 import java.util.Map;
 
@@ -13,6 +13,6 @@ import java.util.Map;
 
 public interface IVideoPlayModel {
 
-    void getVideoDateListData(ObserverData<VedioBean> observerData, Map<String, String> map, String url);
+    void getVideoDateListData(ObserverData<VideoDetails> observerData, Map<String, String> map, String url);
 
 }
