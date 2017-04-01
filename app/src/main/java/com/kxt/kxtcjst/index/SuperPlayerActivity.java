@@ -3,10 +3,12 @@ package com.kxt.kxtcjst.index;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
+import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
 import com.kxt.kxtcjst.index.persenter.SuperPayPersenter;
 import com.kxt.kxtcjst.index.view.ISuperPlayView;
 import com.library.util.volley.load.PageLoadLayout;
@@ -14,19 +16,23 @@ import com.superplayer.library.SuperPlayer;
 
 import butterknife.BindView;
 
-public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView {
+public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView,SuperPlayer.OnNetChangeListener {
 
 
     SuperPayPersenter superPayPersenter;
 
     @BindView(R.id.view_super_player)
-    SuperPlayer viewSuperPlayer;
+    SuperPlayer player;
     @BindView(R.id.layout)
     LinearLayout layout;
 
     String playId;
     @BindView(R.id.page_load)
     PageLoadLayout pageLoad;
+
+    private VideoDetails videoDetails;
+    private  String vedioUrl;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,96 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
 
     @Override
     public void playTuijain() {
+
+    }
+
+    @Override
+    public void playVideo(VideoDetails vidDetails,boolean  isFistPlay) {
+        VideoDetails.DataBean.InfoBean  infoBean=vidDetails.getData().getInfo();
+        title=infoBean.getTitle();
+        vedioUrl=infoBean.getUrl();
+        if(isFistPlay){
+
+            initFistVideo();
+        }else{
+            //代谢
+        }
+
+    }
+    private  void initFistVideo(){
+        if (false) {
+            player.setLive(true);//设置该地址是直播的地址
+        }
+
+        if (player != null) {
+            int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            player.measure(w, h);
+            int height = player.getMeasuredHeight();
+            int width = player.getMeasuredWidth();
+            player.setLayoutParamsNorheight(height);
+
+        }
+        player.setSupportGesture(true);
+        player.setNetChangeListener(true)//设置监听手机网络的变化
+                .setOnNetChangeListener(SuperPlayerActivity.this)//实现网络变化的回调
+                .onPrepared(new SuperPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared() {
+                        /**
+                         * 监听视频是否已经准备完成开始播放。（可以在这里处理视频封面的显示跟隐藏）
+                         */
+                    }
+                }).onComplete(new Runnable() {
+            @Override
+            public void run() {
+                /**
+                 * 监听视频是否已经播放完成了。（可以在这里处理视频播放完成进行的操作）
+                 */
+                if (player != null&&vedioUrl!=null) {
+                    player.play(vedioUrl, 1000);
+                }
+            }
+        }).onInfo(new SuperPlayer.OnInfoListener() {
+            @Override
+            public void onInfo(int what, int extra) {
+                /**
+                 * 监听视频的相关信息。
+                 */
+
+            }
+        }).onError(new SuperPlayer.OnErrorListener() {
+            @Override
+            public void onError(int what, int extra) {
+                /**
+                 * 监听视频播放失败的回调
+                 */
+
+            }
+        }).setTitle(title)//设置视频的titleName
+                .play(vedioUrl);//开始播放视频
+        player.setShowTopControl(false).setSupportGesture(true);
+        player.showCenterControl(true);
+        player.setScaleType(SuperPlayer.SCALETYPE_FITXY);
+    }
+
+    @Override
+    public void onWifi() {
+
+    }
+
+    @Override
+    public void onMobile() {
+
+    }
+
+    @Override
+    public void onDisConnect() {
+
+    }
+
+    @Override
+    public void onNoAvailable() {
 
     }
 }

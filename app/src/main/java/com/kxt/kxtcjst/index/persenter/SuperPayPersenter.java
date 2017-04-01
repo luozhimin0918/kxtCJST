@@ -93,6 +93,7 @@ public class SuperPayPersenter extends CommunalPresenter<ISuperPlayView>  implem
                             if (null != data.getData() && data.getData().getList().size() > 0) {
                                 //数据获取成功
 
+                                mView.playVideo(data,true);
                                 KLog.json(JSON.toJSONString(data));
                                /* dataListview.post(new Runnable() {
                                     @Override
