@@ -2,6 +2,9 @@ package com.kxt.kxtcjst.index;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,6 +41,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setBindingView(R.layout.activity_super_play);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         superPayPersenter = new SuperPayPersenter();
         superPayPersenter.attach(this);
         // 获取意图中的数据
@@ -47,6 +51,53 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
 //        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
     }
 
+    /**
+     * 当横竖屏切换时会调用该方法
+     *
+     * @author
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                layout.setVisibility(View.GONE);
+
+            } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                layout.setVisibility(View.VISIBLE);
+
+            }
+        }
+        if (player != null) {
+            player.onConfigurationChanged(newConfig);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (player != null) {
+            player.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (player != null) {
+            player.onPause(true);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (player != null) {
+            player.onDestroy();
+        }
+
+    }
 
     @Override
     public void playTuijain() {
@@ -121,6 +172,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         player.setShowTopControl(false).setSupportGesture(true);
         player.showCenterControl(true);
         player.setScaleType(SuperPlayer.SCALETYPE_FITXY);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     @Override
