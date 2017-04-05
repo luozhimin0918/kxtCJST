@@ -19,7 +19,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="BrowserThemeDefault" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="BrowserThemeDefault" parent="@android:style/android:Theme.Holo.Light">
         <item name="colorPrimary">#FF323A45</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">false</item>
