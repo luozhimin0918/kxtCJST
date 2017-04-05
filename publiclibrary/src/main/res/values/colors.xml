@@ -43,4 +43,6 @@
     <color name="font_6">#666666</color>
     <color name="font_8">#888888</color>
     <color name="update_btn">#3caafa</color>
+    <color name="tuijaian_color_text">#5E6C75</color>
+    <color name="tuijain_color_small_text">#858E94</color>
 </resources>

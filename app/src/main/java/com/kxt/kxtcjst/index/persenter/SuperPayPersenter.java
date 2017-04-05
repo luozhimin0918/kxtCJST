@@ -32,6 +32,7 @@ import com.kxt.kxtcjst.common.utils.ViewFindUtils;
 import com.kxt.kxtcjst.index.DetailsActivity;
 import com.kxt.kxtcjst.index.adapter.MainPagerAdapter;
 import com.kxt.kxtcjst.index.adapter.VideoAdapter;
+import com.kxt.kxtcjst.index.adapter.VideoListAdapter;
 import com.kxt.kxtcjst.index.entity.TabEntity;
 import com.kxt.kxtcjst.index.fragment.VideoDataFragment;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
@@ -94,6 +95,7 @@ public class SuperPayPersenter extends CommunalPresenter<ISuperPlayView>  implem
                                 //数据获取成功
 
                                 mView.playVideo(data,true);
+                                mView.playTuijain(data);
                                 KLog.json(JSON.toJSONString(data));
                                /* dataListview.post(new Runnable() {
                                     @Override
@@ -142,6 +144,25 @@ public class SuperPayPersenter extends CommunalPresenter<ISuperPlayView>  implem
             case R.id.update_close:
             case R.id.ad_close:
         }*/
+    }
+    VideoListAdapter videoListAdapter;
+    public void putTuijian(final  PageLoadLayout pageLoadLayout,final PullToRefreshListView pullToRefreshListView ,final List<VideoDetails.DataBean.ListBean> listBeen){
+        if (!BaseUtils.isNetworkConnected(getContext())) {
+            pullToRefreshListView.onRefreshComplete();
+            pageLoadLayout.loadError("亲，网络出错了！");
+            return;
+        }
+        pullToRefreshListView.onRefreshComplete();
+        //数据获取成功
+        pullToRefreshListView.post(new Runnable() {
+            @Override
+            public void run() {
+                pageLoadLayout.loadSuccess();
+                videoListAdapter = new VideoListAdapter(getContext(), listBeen);
+                pullToRefreshListView.setAdapter(videoListAdapter);
+                videoListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 }

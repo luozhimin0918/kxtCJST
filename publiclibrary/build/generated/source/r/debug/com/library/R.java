@@ -1803,20 +1803,20 @@ containing a value of this type.
         public static int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f080007;
     }
     public static final class color {
-        public static int abc_background_cache_hint_selector_material_dark=0x7f0b0061;
-        public static int abc_background_cache_hint_selector_material_light=0x7f0b0062;
-        public static int abc_color_highlight_material=0x7f0b0063;
+        public static int abc_background_cache_hint_selector_material_dark=0x7f0b0063;
+        public static int abc_background_cache_hint_selector_material_light=0x7f0b0064;
+        public static int abc_color_highlight_material=0x7f0b0065;
         public static int abc_input_method_navigation_guard=0x7f0b0000;
-        public static int abc_primary_text_disable_only_material_dark=0x7f0b0064;
-        public static int abc_primary_text_disable_only_material_light=0x7f0b0065;
-        public static int abc_primary_text_material_dark=0x7f0b0066;
-        public static int abc_primary_text_material_light=0x7f0b0067;
-        public static int abc_search_url_text=0x7f0b0068;
+        public static int abc_primary_text_disable_only_material_dark=0x7f0b0066;
+        public static int abc_primary_text_disable_only_material_light=0x7f0b0067;
+        public static int abc_primary_text_material_dark=0x7f0b0068;
+        public static int abc_primary_text_material_light=0x7f0b0069;
+        public static int abc_search_url_text=0x7f0b006a;
         public static int abc_search_url_text_normal=0x7f0b0001;
         public static int abc_search_url_text_pressed=0x7f0b0002;
         public static int abc_search_url_text_selected=0x7f0b0003;
-        public static int abc_secondary_text_material_dark=0x7f0b0069;
-        public static int abc_secondary_text_material_light=0x7f0b006a;
+        public static int abc_secondary_text_material_dark=0x7f0b006b;
+        public static int abc_secondary_text_material_light=0x7f0b006c;
         public static int accent_material_dark=0x7f0b0004;
         public static int accent_material_light=0x7f0b0005;
         public static int ampm_text_color=0x7f0b0006;
@@ -1840,16 +1840,16 @@ containing a value of this type.
         public static int calendar_header=0x7f0b0018;
         public static int circle_background=0x7f0b0019;
         public static int darker_blue=0x7f0b001a;
-        public static int date_picker_selector=0x7f0b006b;
+        public static int date_picker_selector=0x7f0b006d;
         public static int date_picker_text_normal=0x7f0b001b;
         public static int date_picker_view_animator=0x7f0b001c;
-        public static int date_picker_year_selector=0x7f0b006c;
+        public static int date_picker_year_selector=0x7f0b006e;
         public static int dialog_bg=0x7f0b001d;
         public static int dim_foreground_disabled_material_dark=0x7f0b001e;
         public static int dim_foreground_disabled_material_light=0x7f0b001f;
         public static int dim_foreground_material_dark=0x7f0b0020;
         public static int dim_foreground_material_light=0x7f0b0021;
-        public static int done_text_color=0x7f0b006d;
+        public static int done_text_color=0x7f0b006f;
         public static int done_text_color_disabled=0x7f0b0022;
         public static int done_text_color_normal=0x7f0b0023;
         public static int error_stroke_color=0x7f0b0024;
@@ -1905,16 +1905,18 @@ containing a value of this type.
         public static int sweet_dialog_bg_color=0x7f0b0056;
         public static int switch_thumb_disabled_material_dark=0x7f0b0057;
         public static int switch_thumb_disabled_material_light=0x7f0b0058;
-        public static int switch_thumb_material_dark=0x7f0b006e;
-        public static int switch_thumb_material_light=0x7f0b006f;
+        public static int switch_thumb_material_dark=0x7f0b0070;
+        public static int switch_thumb_material_light=0x7f0b0071;
         public static int switch_thumb_normal_material_dark=0x7f0b0059;
         public static int switch_thumb_normal_material_light=0x7f0b005a;
         public static int text_color=0x7f0b005b;
         public static int trans_success_stroke_color=0x7f0b005c;
         public static int transparent_black=0x7f0b005d;
-        public static int update_btn=0x7f0b005e;
-        public static int warning_stroke_color=0x7f0b005f;
-        public static int white=0x7f0b0060;
+        public static int tuijaian_color_text=0x7f0b005e;
+        public static int tuijain_color_small_text=0x7f0b005f;
+        public static int update_btn=0x7f0b0060;
+        public static int warning_stroke_color=0x7f0b0061;
+        public static int white=0x7f0b0062;
     }
     public static final class dimen {
         public static int abc_action_bar_content_inset_material=0x7f060031;

@@ -15,6 +15,7 @@ import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
 import com.kxt.kxtcjst.index.persenter.SuperPayPersenter;
 import com.kxt.kxtcjst.index.view.ISuperPlayView;
 import com.library.util.volley.load.PageLoadLayout;
+import com.library.widget.handmark.PullToRefreshListView;
 import com.superplayer.library.SuperPlayer;
 
 import butterknife.BindView;
@@ -32,6 +33,8 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     String playId;
     @BindView(R.id.page_load)
     PageLoadLayout pageLoad;
+    @BindView(R.id.data_listview)
+    PullToRefreshListView  dataListview;
 
     private VideoDetails videoDetails;
     private  String vedioUrl;
@@ -100,7 +103,12 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     }
 
     @Override
-    public void playTuijain() {
+    public void playTuijain(VideoDetails vidDetails) {
+        VideoDetails.DataBean dataBean  =vidDetails.getData();
+        if(dataBean.getList()!=null&&dataBean.getList().size()>0){
+
+            superPayPersenter.putTuijian(pageLoad,dataListview,dataBean.getList());
+        }
 
     }
 

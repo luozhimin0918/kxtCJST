@@ -22,12 +22,31 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+        <com.kxt.kxtcjst.common.coustom.TypeTextView
+            android:id="@+id/item_sp_type"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="推荐"
+            android:textColor="@color/tuijaian_color_text"
+            android:textSize="18sp" />
         <com.library.util.volley.load.PageLoadLayout
             android:id="@+id/page_load"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            </com.library.util.volley.load.PageLoadLayout>
+
+            <com.library.widget.handmark.PullToRefreshListView
+                android:id="@+id/data_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null" />
+        </com.library.util.volley.load.PageLoadLayout>
 
     </LinearLayout>
 

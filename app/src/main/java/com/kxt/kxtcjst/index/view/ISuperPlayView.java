@@ -8,6 +8,6 @@ import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
  */
 
 public interface ISuperPlayView extends CommunalView {
-    void playTuijain();
+    void playTuijain(VideoDetails videoDetails);
     void playVideo(VideoDetails videoDetails,boolean  isFistPlay);
 }
