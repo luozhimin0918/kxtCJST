@@ -48,7 +48,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBindingView(R.layout.activity_super_play);
+        setBindingView(R.layout.activity_super_play,false);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         superPayPersenter = new SuperPayPersenter();
         superPayPersenter.attach(this);
