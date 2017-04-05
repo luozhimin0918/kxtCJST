@@ -11,12 +11,17 @@ import android.widget.LinearLayout;
 
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
+import com.kxt.kxtcjst.common.utils.EventType;
 import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
 import com.kxt.kxtcjst.index.persenter.SuperPayPersenter;
 import com.kxt.kxtcjst.index.view.ISuperPlayView;
 import com.library.util.volley.load.PageLoadLayout;
 import com.library.widget.handmark.PullToRefreshListView;
 import com.superplayer.library.SuperPlayer;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -47,6 +52,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         superPayPersenter = new SuperPayPersenter();
         superPayPersenter.attach(this);
+        EventBus.getDefault().register(this);
         // 获取意图中的数据
         Intent intent = getIntent();
         playId = intent.getStringExtra("id");
@@ -100,6 +106,29 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
             player.onDestroy();
         }
 
+        try {
+            EventBus.getDefault().unregister(this);
+
+        } catch (Exception e) {
+
+        }
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventType eventType) {
+        try {
+
+            switch (eventType) {
+                case POST_USER_NAME:
+                    playId= (String) eventType.getObj();
+                    superPayPersenter.getPlayIdVideoData(pageLoad,playId);
+                    break;
+            }
+
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

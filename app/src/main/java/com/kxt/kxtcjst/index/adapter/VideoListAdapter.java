@@ -16,9 +16,12 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.coustom.MyTabView;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
+import com.kxt.kxtcjst.common.utils.EventType;
 import com.kxt.kxtcjst.index.SuperPlayerActivity;
 import com.kxt.kxtcjst.index.jsonBean.VedioBean;
 import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -103,9 +106,10 @@ public class VideoListAdapter extends BaseAdapter {
         viewHolder.item_video_root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SuperPlayerActivity.class);
-                intent.putExtra("id", dataBeans.get(position).getId());
-                context.startActivity(intent);
+                EventBus.getDefault().post(EventType.POST_USER_NAME.setObject(dataBeans.get(position).getId()));
+//                Intent intent = new Intent(context, SuperPlayerActivity.class);
+//                intent.putExtra("id", dataBeans.get(position).getId());
+//                context.startActivity(intent);
               /*  SpConstant.getReadPreferences().edit().putString(dataBeans.get(position).getId(), dataBeans.get(position).getId()).commit();
                 viewHolder.newTitle.setTextColor(context.getResources().getColor(R.color.font_bb2));
                 Intent intent = new Intent(context, DetailsActivity.class);
