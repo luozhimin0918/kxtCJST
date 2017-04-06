@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
@@ -25,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
-public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView,SuperPlayer.OnNetChangeListener {
+public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView, SuperPlayer.OnNetChangeListener {
 
 
     SuperPayPersenter superPayPersenter;
@@ -39,16 +40,20 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     @BindView(R.id.page_load)
     PageLoadLayout pageLoad;
     @BindView(R.id.data_listview)
-    PullToRefreshListView  dataListview;
+    PullToRefreshListView dataListview;
+    @BindView(R.id.sp_title_text)
+    TextView spTitleText;
+    @BindView(R.id.sp_showtime)
+    TextView spShowtime;
 
     private VideoDetails videoDetails;
-    private  String vedioUrl;
+    private String vedioUrl;
     private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBindingView(R.layout.activity_super_play,false);
+        setBindingView(R.layout.activity_super_play, false);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         superPayPersenter = new SuperPayPersenter();
         superPayPersenter.attach(this);
@@ -56,7 +61,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         // 获取意图中的数据
         Intent intent = getIntent();
         playId = intent.getStringExtra("id");
-        superPayPersenter.getPlayIdVideoData(pageLoad,playId);
+        superPayPersenter.getPlayIdVideoData(pageLoad, playId);
 //        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
     }
 
@@ -114,14 +119,15 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         }
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EventType eventType) {
         try {
 
             switch (eventType) {
                 case POST_USER_NAME:
-                    playId= (String) eventType.getObj();
-                    superPayPersenter.getPlayIdVideoData(pageLoad,playId);
+                    playId = (String) eventType.getObj();
+                    superPayPersenter.getPlayIdVideoData(pageLoad, playId);
                     break;
             }
 
@@ -133,28 +139,31 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
 
     @Override
     public void playTuijain(VideoDetails vidDetails) {
-        VideoDetails.DataBean dataBean  =vidDetails.getData();
-        if(dataBean.getList()!=null&&dataBean.getList().size()>0){
+        VideoDetails.DataBean dataBean = vidDetails.getData();
+        if (dataBean.getList() != null && dataBean.getList().size() > 0) {
 
-            superPayPersenter.putTuijian(pageLoad,dataListview,dataBean.getList());
+            superPayPersenter.putTuijian(pageLoad, dataListview, dataBean.getList());
         }
 
     }
 
     @Override
-    public void playVideo(VideoDetails vidDetails,boolean  isFistPlay) {
-        VideoDetails.DataBean.InfoBean  infoBean=vidDetails.getData().getInfo();
-        title=infoBean.getTitle();
-        vedioUrl=infoBean.getUrl();
-        if(isFistPlay){
+    public void playVideo(VideoDetails vidDetails, boolean isFistPlay) {
+        VideoDetails.DataBean.InfoBean infoBean = vidDetails.getData().getInfo();
+        title = infoBean.getTitle();
+        vedioUrl = infoBean.getUrl();
+        spTitleText.setText(infoBean.getTitle());
+        spShowtime.setText(infoBean.getPlay_count());
+        if (isFistPlay) {
 
             initFistVideo();
-        }else{
+        } else {
             //代谢
         }
 
     }
-    private  void initFistVideo(){
+
+    private void initFistVideo() {
         if (false) {
             player.setLive(true);//设置该地址是直播的地址
         }
@@ -184,7 +193,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
                 /**
                  * 监听视频是否已经播放完成了。（可以在这里处理视频播放完成进行的操作）
                  */
-                if (player != null&&vedioUrl!=null) {
+                if (player != null && vedioUrl != null) {
                     player.play(vedioUrl, 1000);
                 }
             }
