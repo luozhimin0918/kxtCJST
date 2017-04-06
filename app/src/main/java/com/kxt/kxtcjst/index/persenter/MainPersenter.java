@@ -79,7 +79,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
             return;
         }
         Map<String, String> map = new HashMap<>();
-        String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+        String url = UrlConstant.VIDEO_DATA_URL_TITLE;
         ConfigJson dataJson = new ConfigJson();
         Gson gson = new Gson();
         try {
