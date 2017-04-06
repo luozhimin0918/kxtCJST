@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
-import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
@@ -29,7 +29,7 @@ public class MainActivity extends CommunalActivity implements IMainView {
     @BindView(R.id.filter_img)
     RelativeLayout filterIcon;
     @BindView(R.id.tab_main)
-    CommonTabLayout tabMain;
+    SlidingTabLayout tabMain;
     @BindView(R.id.view_pager)
     ViewPager viewpagerMain;
 

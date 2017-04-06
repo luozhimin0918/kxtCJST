@@ -7,13 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
         android:background="@color/blue_ff"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
             android:src="@mipmap/logo_biao" />
@@ -21,10 +21,32 @@
         <RelativeLayout
             android:id="@+id/filter_img"
             android:layout_width="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <com.flyco.tablayout.CommonTabLayout
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/tab_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tl:tl_divider_color="@color/white"
+                tl:tl_divider_padding="0dp"
+                tl:tl_divider_width="0px"
+                tl:tl_indicator_color="@color/white"
+                tl:tl_indicator_height="3dp"
+                tl:tl_indicator_width="10dp"
+                tl:tl_indicator_corner_radius="5dp"
+                tl:tl_indicator_width_equal_title="false"
+                tl:tl_tab_padding="15dp"
+                tl:tl_tab_space_equal="false"
+                tl:tl_textSelectColor="@color/white"
+                tl:tl_textUnselectColor="@color/white"
+                tl:tl_textsize="17sp"
+                tl:tl_underline_color="@color/white"
+                tl:tl_underline_height="0px" />
+            <!--android:background="?attr/hq_top"-->
+           <!-- <com.flyco.tablayout.CommonTabLayout
                 android:id="@+id/tab_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,7 +57,7 @@
                 tl:tl_indicator_height="3dp"
                 tl:tl_indicator_width="10dp"
                 tl:tl_tab_width="70dp"
-                tl:tl_textsize="15sp" />
+                tl:tl_textsize="15sp" />-->
         </RelativeLayout>
 
 

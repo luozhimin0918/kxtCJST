@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
-import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
@@ -57,7 +57,7 @@ import java.util.regex.Pattern;
 public class MainPersenter extends CommunalPresenter<IMainView>  implements View.OnClickListener  {
     public PopupWindowUtils popupWindowUtils;
     private String adUrl;
-    private CommonTabLayout tabMain;
+    private SlidingTabLayout tabMain;
     private ArrayList<CustomTabEntity> mTabs = new ArrayList<>();
     private ViewPager viewpagerMain;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -279,23 +279,18 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      *
      * @param tabMain
      */
-    public void initTabs(final CommonTabLayout tabMain,VedioTitleBean vedioTitleBean) {
+    public void initTabs(final SlidingTabLayout tabMain, VedioTitleBean vedioTitleBean) {
         this.tabMain=tabMain;
         mTitles=new String[vedioTitleBean.getData().size()];
         for (int i = 0; i < vedioTitleBean.getData().size(); i++) {
             mTabs.add(new TabEntity(vedioTitleBean.getData().get(i).getCat_name()));
             mTitles[i]=vedioTitleBean.getData().get(i).getCat_name();
         }
-        tabMain.setTabData(mTabs);
 
         tabMain.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
 
-                tabMain.setCurrentTab(position);
-//                DateBean dateBean = dateBeans.get(lastTabLayout);
-//                dateBean.setLastTab(lastTab);
-//                mView.onTabChanged(dateBean);
                 viewpagerMain.setCurrentItem(position);
 
             }
@@ -314,12 +309,10 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      * @param viewpagerMain
      * @param fragmentManager
      */
-    public void initViewPager(ViewPager viewpagerMain, FragmentManager fragmentManager,VedioTitleBean vedioTitleBean) {
+    public void initViewPager(final ViewPager viewpagerMain, FragmentManager fragmentManager, VedioTitleBean vedioTitleBean) {
         this.viewpagerMain = viewpagerMain;
 
-       /* mFragments.add(new VideoDataFragment());
-        mFragments.add(new VideoDataFragment());
-        mFragments.add(new VideoDataFragment());*/
+
         for(int m=0;m<vedioTitleBean.getData().size();m++){
             Bundle data = new Bundle();
             data.putString("tagId", vedioTitleBean.getData().get(m).getId());
@@ -328,12 +321,11 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
             mFragments.add(videoDataFragment);
         }
 
-        mDecorView = ((Activity) getContext()).getWindow().getDecorView();
 
-        viewpagerMain = ViewFindUtils.find(mDecorView, R.id.view_pager);
-        viewpagerMain.setOffscreenPageLimit(2);
         viewpagerMain.setAdapter(new MainPagerAdapter(fragmentManager, mTitles, mFragments));
-
+        tabMain.setViewPager(viewpagerMain);
+        tabMain.setIndicatorMargin(0, 0, 0, 0);
+        tabMain.getTitleView(0).setTextSize(18);
         viewpagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -342,15 +334,15 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
 
             @Override
             public void onPageSelected(int position) {
-                tabMain.setCurrentTab(position);
-               /* if (position != 0) {
-                    flitdataImg.setVisibility(View.INVISIBLE);
-                } else {
-                    flitdataImg.setVisibility(View.VISIBLE);
+                viewpagerMain.setCurrentItem(position, false);
+                if (mTitles != null && mTitles.length > position) {
+                    for (int i = 0; i < mTitles.length; i++) {
+                        tabMain.getTitleView(i).setTextSize(17);
+                    }
+                    tabMain.getTitleView(position).setTextSize(18);
                 }
-                DateBean dateBean = dateBeans.get(lastTabLayout);
-                dateBean.setLastTab(position);
-                mView.onTabChanged(dateBean);*/
+
+
             }
 
             @Override
