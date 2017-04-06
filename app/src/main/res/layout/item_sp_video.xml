@@ -28,7 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:background="#60000000"
-            android:padding="5dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:text="我觉得是"
             android:textColor="@color/white"
             android:textSize="13sp" />

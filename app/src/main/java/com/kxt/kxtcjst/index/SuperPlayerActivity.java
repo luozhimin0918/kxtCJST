@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,6 +46,8 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     TextView spTitleText;
     @BindView(R.id.sp_showtime)
     TextView spShowtime;
+    @BindView(R.id.back_but_play)
+    ImageView backButPlay;
 
     private VideoDetails videoDetails;
     private String vedioUrl;
@@ -61,6 +64,12 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         // 获取意图中的数据
         Intent intent = getIntent();
         playId = intent.getStringExtra("id");
+        backButPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         superPayPersenter.getPlayIdVideoData(pageLoad, playId);
 //        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
     }
@@ -77,9 +86,10 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 layout.setVisibility(View.GONE);
-
+//                backButPlay.setVisibility(View.GONE);
             } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 layout.setVisibility(View.VISIBLE);
+//                backButPlay.setVisibility(View.VISIBLE);
 
             }
         }
@@ -96,6 +106,15 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (player != null && player.onBackPressed()) {
+            return;
+        } else {
+
+        }
+        super.onBackPressed();
+    }
     @Override
     public void onPause() {
         super.onPause();
@@ -178,6 +197,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
 
         }
         player.setSupportGesture(true);
+        player.setShowTopControl(true);
         player.setNetChangeListener(true)//设置监听手机网络的变化
                 .setOnNetChangeListener(SuperPlayerActivity.this)//实现网络变化的回调
                 .onPrepared(new SuperPlayer.OnPreparedListener() {

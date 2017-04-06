@@ -254,11 +254,12 @@ public class SuperPlayer extends RelativeLayout {
             return;
         }
         if (!isShowing && isPrepare) {
-            if (!isShowTopControl && portrait) {
+           /* if (!isShowTopControl && portrait) {
                 showTopControl(false);
             } else {
                 showTopControl(true);
-            }
+            }*/
+            showTopControl(true);
             if (isShowCenterControl) {
                 $.id(R.id.view_jky_player_center_control).visible();
             }
@@ -1048,9 +1049,11 @@ public class SuperPlayer extends RelativeLayout {
             $.id(R.id.view_jky_player_fullscreen).image(
                     R.drawable.shrink_video);
             $.id(R.id.app_video_finish).visibility(VISIBLE);
+            $.id(R.id.app_video_title).visibility(VISIBLE);
         } else {
             $.id(R.id.view_jky_player_fullscreen).image(R.drawable.enlarge_video);
-            $.id(R.id.app_video_finish).visibility(GONE);
+            $.id(R.id.app_video_finish).visibility(VISIBLE);
+            $.id(R.id.app_video_title).visibility(GONE);
         }
     }
 

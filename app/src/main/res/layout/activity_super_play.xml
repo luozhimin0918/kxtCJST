@@ -8,15 +8,25 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.superplayer.library.SuperPlayer
         android:id="@+id/view_super_player"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         ></com.superplayer.library.SuperPlayer>
-    <!--</FrameLayout>-->
+        <ImageView
+            android:id="@+id/back_but_play"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/back_button_play" />
+    </FrameLayout>
 
 
     <LinearLayout

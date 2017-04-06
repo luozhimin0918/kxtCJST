@@ -3,17 +3,17 @@
     android:id="@+id/app_video_top_box"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="#88000000"
     android:orientation="horizontal"
     android:visibility="gone" >
 
     <ImageView
         android:id="@+id/app_video_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
-        android:padding="15dp"
-        android:src="@drawable/ic_back_white" />
+        android:padding="5dp"
+        android:src="@drawable/back_button_play" />
 
     <LinearLayout
         android:id="@+id/view_jky_player_top_right"
@@ -54,6 +54,6 @@
         android:text="这是个标题"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -72,7 +72,7 @@ public class VideoAdapter extends BaseAdapter {
             viewHolder.newTitle.setTextColor(context.getResources().getColor(R.color.text_title));
         }*/
         try {
-            String time = BaseUtils.getDateBySjc(dataBeans.get(position).getPublish_time()).substring(5, 16);
+            String time = BaseUtils.getDateBySjc(dataBeans.get(position).getPublish_time()).substring(0, 10);
             viewHolder.sp_timelong.setText(time);
         } catch (Exception e) {
             e.getMessage();
