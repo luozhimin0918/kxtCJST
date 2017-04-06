@@ -5,7 +5,11 @@
     android:layout_height="230dp"
     android:background="@color/white"
     android:orientation="vertical">
-
+    <View
+        android:background="#F7F7F7"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"></View>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="195dp">
