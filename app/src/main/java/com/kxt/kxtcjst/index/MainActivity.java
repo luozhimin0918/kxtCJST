@@ -1,8 +1,7 @@
 package com.kxt.kxtcjst.index;
 
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
@@ -12,15 +11,19 @@ import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalActivity;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
 import com.kxt.kxtcjst.common.utils.DoubleClickUtils;
+import com.kxt.kxtcjst.index.jsonBean.VedioTitleBean;
 import com.kxt.kxtcjst.index.persenter.MainPersenter;
 import com.kxt.kxtcjst.index.view.IMainView;
 import com.library.manager.ActivityManager;
+import com.library.util.volley.load.PageLoadLayout;
 import com.library.widget.window.ToastView;
 import com.socks.library.KLog;
 
 import butterknife.BindView;
 
-public class MainActivity extends CommunalActivity  implements IMainView{
+public class MainActivity extends CommunalActivity implements IMainView {
+    @BindView(R.id.page_load)
+    PageLoadLayout pageLoad;
     private MainPersenter mainPersenter;
     private boolean isShow = false;
     @BindView(R.id.filter_img)
@@ -31,14 +34,14 @@ public class MainActivity extends CommunalActivity  implements IMainView{
     ViewPager viewpagerMain;
 
     private String[] mTitles = {"推荐", "财经视听", "财经汇"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setBindingView(R.layout.activity_main);
-        mainPersenter=new MainPersenter();
+        mainPersenter = new MainPersenter();
         mainPersenter.attach(this);
-        mainPersenter.initTabs(tabMain,mTitles);
-        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
+        mainPersenter.getSpTitlePer(pageLoad);
     }
 
 
@@ -51,12 +54,20 @@ public class MainActivity extends CommunalActivity  implements IMainView{
             super.onBackPressed();
         }
     }
+
     @Override
     public void ShowAdPopView() {
         if (CjstApplicaion.getInstance().getAdConfigBean() != null) {
             mainPersenter.showAdPop(filterIcon);
         }
     }
+
+    @Override
+    public void initTabView(VedioTitleBean vedioTitleBean) {
+        mainPersenter.initTabs(tabMain, vedioTitleBean);
+        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager(),vedioTitleBean);
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 // TODO Auto-generated method stub

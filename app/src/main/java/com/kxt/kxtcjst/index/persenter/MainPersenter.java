@@ -15,15 +15,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.google.gson.Gson;
 import com.kxt.kxtcjst.CjstApplicaion;
 import com.kxt.kxtcjst.R;
 import com.kxt.kxtcjst.common.base.CommunalPresenter;
+import com.kxt.kxtcjst.common.constant.UrlConstant;
 import com.kxt.kxtcjst.common.coustom.LoadWebView;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
+import com.kxt.kxtcjst.common.utils.ObserverData;
 import com.kxt.kxtcjst.common.utils.PopupWindowUtils;
 import com.kxt.kxtcjst.common.utils.ViewFindUtils;
 import com.kxt.kxtcjst.index.DetailsActivity;
@@ -31,11 +35,18 @@ import com.kxt.kxtcjst.index.adapter.MainPagerAdapter;
 import com.kxt.kxtcjst.index.entity.TabEntity;
 import com.kxt.kxtcjst.index.fragment.VideoDataFragment;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
+import com.kxt.kxtcjst.index.jsonBean.ConfigJson;
 import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
+import com.kxt.kxtcjst.index.jsonBean.VedioTitleBean;
+import com.kxt.kxtcjst.index.model.IMainTitleModelImp;
 import com.kxt.kxtcjst.index.view.IMainView;
+import com.library.util.volley.VolleyHttpUtil2;
+import com.library.util.volley.load.PageLoadLayout;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,9 +63,68 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private View mDecorView;
     private String[] mTitles;
-    private List<String> mTitlesID=new ArrayList<>();
+    private IMainTitleModelImp iMainTitleModelImp;
     public  MainPersenter(){
+        iMainTitleModelImp=new IMainTitleModelImp(this);
         popupWindowUtils=new PopupWindowUtils();
+    }
+
+    /**
+     * 获取视频的数据
+     *
+     */
+    public void getSpTitlePer( final PageLoadLayout pageLoad) {
+        if (!BaseUtils.isNetworkConnected(getContext())) {
+            pageLoad.loadError("亲，网络出错了！");
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+        ConfigJson dataJson = new ConfigJson();
+        Gson gson = new Gson();
+        try {
+            map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
+            iMainTitleModelImp.getSpTitle(new ObserverData<VedioTitleBean>() {
+                @Override
+                public void onCallback(final VedioTitleBean data) {
+                    super.onCallback(data);
+                    if (null != data) {
+                        KLog.json(JSON.toJSONString(data));
+                        if (data.getStatus()==1) {
+                            if (null != data.getData() && data.getData().size() > 0) {
+                                //数据获取成功
+
+                                        pageLoad.loadSuccess();
+                                      mView.initTabView(data);
+
+                            } else {
+                                pageLoad.loadNoData(getContext().getResources().getString(R.string.no_video_data));
+//                                CjrlApplication.getInstance().setAddValues(null);
+                            }
+
+                        } else {
+//                            CjrlApplication.getInstance().setAddValues(null);
+                            pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(final String error) {
+                    super.onError(error);
+//                    CjrlApplication.getInstance().setAddValues(null);
+                    if (error.equals(VolleyHttpUtil2.ERROR_NOT_NETWORK)) {
+                        pageLoad.loadError(getContext().getResources().getString(R.string.load_nonet));
+                    } else {
+                        pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
+
+                    }
+                }
+            }, map, url);
+        } catch (Exception e) {
+            e.printStackTrace();
+            pageLoad.loadError(getContext().getResources().getString(R.string.load_err));
+        }
     }
 
 
@@ -209,11 +279,12 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      *
      * @param tabMain
      */
-    public void initTabs(final CommonTabLayout tabMain,String[] mTitles) {
+    public void initTabs(final CommonTabLayout tabMain,VedioTitleBean vedioTitleBean) {
         this.tabMain=tabMain;
-        this.mTitles=mTitles;
-        for (int i = 0; i < mTitles.length; i++) {
-            mTabs.add(new TabEntity(mTitles[i]));
+        mTitles=new String[vedioTitleBean.getData().size()];
+        for (int i = 0; i < vedioTitleBean.getData().size(); i++) {
+            mTabs.add(new TabEntity(vedioTitleBean.getData().get(i).getCat_name()));
+            mTitles[i]=vedioTitleBean.getData().get(i).getCat_name();
         }
         tabMain.setTabData(mTabs);
 
@@ -243,18 +314,15 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      * @param viewpagerMain
      * @param fragmentManager
      */
-    public void initViewPager(ViewPager viewpagerMain, FragmentManager fragmentManager) {
+    public void initViewPager(ViewPager viewpagerMain, FragmentManager fragmentManager,VedioTitleBean vedioTitleBean) {
         this.viewpagerMain = viewpagerMain;
-        mTitlesID.add(0,new String("139"));
-        mTitlesID.add(1,new String("135"));
-        mTitlesID.add(2,new String("141"));
 
        /* mFragments.add(new VideoDataFragment());
         mFragments.add(new VideoDataFragment());
         mFragments.add(new VideoDataFragment());*/
-        for(int m=0;m<mTitlesID.size();m++){
+        for(int m=0;m<vedioTitleBean.getData().size();m++){
             Bundle data = new Bundle();
-            data.putString("tagId", mTitlesID.get(m));
+            data.putString("tagId", vedioTitleBean.getData().get(m).getId());
             VideoDataFragment videoDataFragment = new VideoDataFragment();
             videoDataFragment.setArguments(data);
             mFragments.add(videoDataFragment);
