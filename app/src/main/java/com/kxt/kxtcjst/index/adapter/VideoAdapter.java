@@ -89,6 +89,7 @@ public class VideoAdapter extends BaseAdapter {
                     }
                 });
 
+        viewHolder.sp_times.setText(dataBeans.get(position).getPlay_count());
        String tags =  dataBeans.get(position).getCategory_id();
         viewHolder.news_tab.removeAllViews();
 
