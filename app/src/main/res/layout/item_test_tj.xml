@@ -10,23 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
         android:paddingRight="10dp">
 
 
-        <ImageView
-            android:id="@+id/sp_img"
+        <FrameLayout
             android:layout_width="150dp"
-            android:layout_height="105dp"
-            android:src="@drawable/empty_photo_jiu_big"
-            />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/sp_img"
+                android:layout_width="150dp"
+                android:layout_height="105dp"
+                android:src="@drawable/empty_photo_jiu_big"
+                />
+            <ImageView
+                android:id="@+id/sp_play"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/play_item"
+                android:visibility="visible" />
+         </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="105dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -40,7 +51,7 @@
                 android:id="@+id/sp_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -65,8 +76,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:background="@mipmap/tuijain_time"
                         android:gravity="center_vertical" />
 
@@ -84,8 +95,8 @@
 
                     <ImageView
                         android:id="@+id/sp_cs_img"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:background="@mipmap/tuijian_paly"
                         android:gravity="center_vertical" />
 
