@@ -4,110 +4,155 @@
     android:layout_height="match_parent"
     android:background="@color/pop_background">
 
-    <RelativeLayout
-        android:id="@+id/update_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <FrameLayout
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="120dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginRight="52dp"
-        android:background="@mipmap/update_bg">
-
-        <TextView
+        android:layout_width="300dp"
+        android:layout_height="450dp">
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:src="@mipmap/updat_bg" />
+        <ImageView
             android:layout_marginTop="70dp"
-            android:gravity="center_horizontal"
-            android:text="发现新版本"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <ScrollView
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="66dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
-            android:layout_marginTop="150dp"
-            android:scrollbars="none">
-
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:src="@mipmap/updat_white" />
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/updat_top" />
+        <RelativeLayout
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/update_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/close_tang" />
+            <TextView
+                android:id="@+id/newBanben"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_horizontal"
+                android:text="发现新版本"
+                android:textColor="#1CA1F7"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/bule_line"
+                android:layout_below="@+id/newBanben"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:src="@mipmap/updat_line_blue" />
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_below="@+id/bule_line"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:scrollbars="none">
 
-                <TextView
-                    android:id="@+id/update_version"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:textColor="@color/font_6"
-                    android:textSize="13sp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/update_version"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:textColor="@color/font_6"
+                        android:textSize="13sp" />
 
 
-                <TextView
-                    android:id="@+id/update_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/font_6"
-                    android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/update_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/font_6"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="10dp"
-                    android:text="更新类容："
-                    android:textColor="@color/font_6"
-                    android:textSize="13sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="5dp"
+                        android:text="更新类容："
+                        android:textColor="@color/font_6"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/update_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="10dp"
-                    android:lineSpacingExtra="10dp"
-                    android:text=""
-                    android:textColor="@color/font_8"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/update_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="5dp"
+                        android:lineSpacingExtra="10dp"
+                        android:text=""
+                        android:textColor="@color/font_8"
+                        android:textSize="12sp" />
 
-            </LinearLayout>
-        </ScrollView>
+                </LinearLayout>
+            </ScrollView>
 
-        <TextView
-            android:id="@+id/upate_update"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_above="@+id/view_1"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/update_blue_shap"
-            android:gravity="center"
-            android:text="立即升级"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_below="@+id/scroll"
+                android:id="@+id/upate_update"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/update_but"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/close_yihuo"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upate_update"
+                android:gravity="center"
+                android:text="以后再说"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <View
-            android:id="@+id/view_1"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </FrameLayout>
 
-    <ImageView
-        android:id="@+id/update_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="125dp"
-        android:src="@mipmap/pop_close" />
+
+
 </RelativeLayout>

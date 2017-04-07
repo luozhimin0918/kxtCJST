@@ -181,6 +181,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
         TextView textSize = (TextView) updatePop.findViewById(R.id.update_size);
         TextView textContent = (TextView) updatePop.findViewById(R.id.update_content);
         TextView textUpdate = (TextView) updatePop.findViewById(R.id.upate_update);
+        TextView close_yihuo= (TextView) updatePop.findViewById(R.id.close_yihuo);
 
         String version = updateBean.getData().getVersion();
         boolean isNumOk = true;
@@ -207,6 +208,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                     textContent.setText(content);
                     updateClose.setOnClickListener(this);
                     textUpdate.setOnClickListener(this);
+                    close_yihuo.setOnClickListener(this);
 
                     popupWindowUtils.dismiss();
                     popupWindowUtils.initPopupWindwo(filterIcon, updatePop,
@@ -230,6 +232,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.close_yihuo:
             case R.id.update_close:
             case R.id.ad_close:
             case R.id.web_close:
