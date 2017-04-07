@@ -58,8 +58,15 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
         }
         Map<String, String> map = new HashMap<>();
         String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+
         ConfigListVideo dataJson = new ConfigListVideo();
-        dataJson.setCid(tagId);
+        if(tagId.equals("000")){
+            url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
+        }else{
+            dataJson.setCid(tagId);
+        }
+
+
         Gson gson = new Gson();
         try {
             map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
@@ -123,10 +130,14 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                 final Map<String, String> map = new HashMap<>();
                 Gson gson = new Gson();
                 String url = UrlConstant.VIDEO_DATA_URL_ITEM;
-                ConfigListVideo dataJson=new ConfigListVideo();
+                ConfigListVideo dataJson = new ConfigListVideo();
+                if(tagId.equals("000")){
+                    url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
+                }else{
+                    dataJson.setCid(tagId);
+                }
                 if(lastData!=null&&lastData.size()>0){
 
-                    dataJson.setCid(tagId);
                     dataJson.setMarkid(lastData.get(lastData.size()-1).getId());
                 }
 

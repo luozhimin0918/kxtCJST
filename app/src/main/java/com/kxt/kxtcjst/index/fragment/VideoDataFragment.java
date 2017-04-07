@@ -47,7 +47,7 @@ public class VideoDataFragment extends CommunalFragment implements IVideoDataVie
         super.onInitialize(savedInstanceState);
 
         Bundle bundle = getArguments();
-        tagId = bundle.getString("tagId", "0");
+        tagId = bundle.getString("tagId", "000");
 
 
         dataListview = (PullToRefreshListView) replaceLayout.findViewById(R.id.data_listview);
