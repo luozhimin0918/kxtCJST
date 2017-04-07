@@ -37,6 +37,7 @@ import com.kxt.kxtcjst.index.entity.TabEntity;
 import com.kxt.kxtcjst.index.fragment.VideoDataFragment;
 import com.kxt.kxtcjst.index.jsonBean.AdConfigBean;
 import com.kxt.kxtcjst.index.jsonBean.ConfigJson;
+import com.kxt.kxtcjst.index.jsonBean.ConfigOneVideoJson;
 import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
 import com.kxt.kxtcjst.index.jsonBean.VedioBean;
 import com.kxt.kxtcjst.index.jsonBean.VideoDetails;
@@ -80,8 +81,9 @@ public class SuperPayPersenter extends CommunalPresenter<ISuperPlayView>  implem
             return;
         }
         Map<String, String> map = new HashMap<>();
-        String url = UrlConstant.VIDEO_DATA_URL_ONE+"?vid="+playId;
-        ConfigJson dataJson = new ConfigJson();
+        String url = UrlConstant.VIDEO_DATA_URL_ONE;
+        ConfigOneVideoJson dataJson = new ConfigOneVideoJson();
+        dataJson.setVid(playId);
         Gson gson = new Gson();
         try {
             map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
@@ -90,23 +92,14 @@ public class SuperPayPersenter extends CommunalPresenter<ISuperPlayView>  implem
                 public void onCallback(final VideoDetails data) {
                     super.onCallback(data);
                     if (null != data) {
-                        if (data.getCode()==200) {
+                        if (data.getStatus()==1) {
                             if (null != data.getData() && data.getData().getList().size() > 0) {
                                 //数据获取成功
 
                                 mView.playVideo(data,true);
                                 mView.playTuijain(data);
                                 KLog.json(JSON.toJSONString(data));
-                               /* dataListview.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        lastData = (ArrayList<VedioBean.DataBean>) data.getData();
-                                        pageLoad.loadSuccess();
-                                        videoAdapter = new VideoAdapter(getContext(), lastData);
-                                        dataListview.setAdapter(videoAdapter);
-                                        videoAdapter.notifyDataSetChanged();
-                                    }
-                                });*/
+
                             } else {
                                 pageLoad.loadNoData(getContext().getResources().getString(R.string.no_video_data));
 //                                CjrlApplication.getInstance().setAddValues(null);

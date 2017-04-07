@@ -80,6 +80,8 @@ public class VideoListAdapter extends BaseAdapter {
             e.getMessage();
             viewHolder.sp_timelong.setText("");
         }
+
+        viewHolder.sp_times.setText(dataBeans.get(position).getPlay_count());
         viewHolder.sp_img.setImageDrawable(context.getResources().getDrawable(R.drawable.empty_photo_jiu_big));
         Glide.with(context)
                 .load(dataBeans.get(position).getPicture())

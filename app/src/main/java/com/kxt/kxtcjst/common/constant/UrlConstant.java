@@ -5,7 +5,8 @@ package com.kxt.kxtcjst.common.constant;
  */
 
 public class UrlConstant {
-    public static final String BASE_URL = "http://adi.kuaixun56.com/";
+//    public static final String BASE_URL = "http://adi.kuaixun56.com/";
+public static final String BASE_URL = "http://test.adi.kuaixun56.com/";
     public static final String SYSTEM_VALUE = "android";
 
 
@@ -16,7 +17,7 @@ public class UrlConstant {
     public static final String VIDEO_DATA_URL_ITEM = BASE_URL +"cjst/list_video";//&markid=476
     public static final String VIDEO_DATA_URL_ITEM_TUIJIAN = BASE_URL +"cjst/recommend";//&markid=476
 
-    public static final String VIDEO_DATA_URL_ONE= "http://appapi.kxt.com/VideoCenter/getVideoNew";//&markid=476
+    public static final String VIDEO_DATA_URL_ONE=  BASE_URL +"cjst/getInfoVideo";//vid=345
 
 
     public static final String URL_PRIVATE_KEY = "kuaixun56pslui*!@~^jhk";

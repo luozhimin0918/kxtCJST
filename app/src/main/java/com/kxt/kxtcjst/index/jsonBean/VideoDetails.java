@@ -18,16 +18,16 @@ public class VideoDetails implements Serializable{
 	 * data : {"info":{"id":"462","title":"减产提振原油多头，看空弥漫全球金市","picture":"http://img.kuaixun360.com//Uploads/Picture/2016-12-07/5847b561cf8f0.jpg?x-oss-process=style/200-60","description":"","url":"http://media.kxt.com/video/cjgc/1207.mp4","publish_time":"1481094060","play_count":"15776","share_url":"http://m.kxt.com/videoArt/462","is_collect":"0"},"list":[{"id":"540","title":"回落布局原油 机不可失","picture":"http://img.kuaixun360.com//Uploads/Picture/2017-03-31/58ddf00c16331.jpg","url":"http://media.kxt.com/video/cjgc/20170331.mp4","publish_time":"1490939820","category_id":"139","play_count":"5956","description":""},{"id":"539","title":"MA均线（四）","picture":"http://img.kuaixun360.com//Uploads/Picture/2017-03-30/58dcc2f8f1438.jpg","url":"http://media.kxt.com/video/tzxt/52.mp4","publish_time":"1490862420","category_id":"135","play_count":"10534","description":""}],"moreFlag":true}
 	 */
 
-	private int code;
+	private int status;
 	private String msg;
 	private DataBean data;
 
-	public int getCode() {
-		return code;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public String getMsg() {
