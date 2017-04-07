@@ -70,10 +70,10 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     updateBean.setAud(claims.get("aud").toString());
                     updateBean.setStatus(claims.get("status").toString());
                     LinkedHashMap<String, Object> dataClaims = (LinkedHashMap<String, Object>) claims.get("data");
-                    updateData.setContent(dataClaims.get("Content").toString());
-                    updateData.setSize(dataClaims.get("Size").toString());
-                    updateData.setVersion(dataClaims.get("Version").toString());
-                    updateData.setDownloadUrl(dataClaims.get("DownloadUrl").toString());
+                    updateData.setContent(dataClaims.get("content").toString());
+                    updateData.setSize(dataClaims.get("size").toString());
+                    updateData.setVersion(dataClaims.get("version").toString());
+                    updateData.setDownloadUrl(dataClaims.get("downloadUrl").toString());
                     updateBean.setData(updateData);
                     if (claims.get("status").toString().equals("1")) {
                         CjstApplicaion.getInstance().setUpdateBean(updateBean);
@@ -113,11 +113,11 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     adConfigBean.setAud(claims.get("aud").toString());
                     adConfigBean.setMsg(claims.get("msg").toString());
                     Map<String, Object> dataClaims = (Map<String, Object>) claims.get("data");
-                    Map<String, Object> adClaims = (Map<String, Object>) dataClaims.get("Advertisement");
-                    advertisementBean.setImageUrl(adClaims.get("ImageUrl").toString());
-                    advertisementBean.setTitle(adClaims.get("Title").toString());
-                    advertisementBean.setType(adClaims.get("Type").toString());
-                    advertisementBean.setUrl(adClaims.get("Url").toString());
+                    Map<String, Object> adClaims = (Map<String, Object>) dataClaims.get("advertisement");
+                    advertisementBean.setImageUrl(adClaims.get("imageUrl").toString());
+                    advertisementBean.setTitle(adClaims.get("title").toString());
+                    advertisementBean.setType(adClaims.get("type").toString());
+                    advertisementBean.setUrl(adClaims.get("url").toString());
                     adDataBean.setAdvertisement(advertisementBean);
                     adConfigBean.setData(adDataBean);
                     if (claims.get("status").toString().equals("1")) {
