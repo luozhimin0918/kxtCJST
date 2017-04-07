@@ -281,12 +281,11 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
      */
     public void initTabs(final SlidingTabLayout tabMain, VedioTitleBean vedioTitleBean) {
         this.tabMain=tabMain;
-        mTitles=new String[vedioTitleBean.getData().size()+1];
-        mTitles[0]="推荐";
-        for (int i = 1; i < vedioTitleBean.getData().size()+1; i++) {
-            mTitles[i]=vedioTitleBean.getData().get(i-1).getCat_name();
+        mTitles=new String[vedioTitleBean.getData().size()];
+        for (int i = 0; i < vedioTitleBean.getData().size(); i++) {
+            mTabs.add(new TabEntity(vedioTitleBean.getData().get(i).getCat_name()));
+            mTitles[i]=vedioTitleBean.getData().get(i).getCat_name();
         }
-
         tabMain.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -313,18 +312,14 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
         this.viewpagerMain = viewpagerMain;
 
 
-        for(int m=0;m<vedioTitleBean.getData().size()+1;m++){
+        for(int m=0;m<vedioTitleBean.getData().size();m++){
             Bundle data = new Bundle();
-            if(m==0){
-                data.putString("tagId", "000");
-            }else{
-                data.putString("tagId", vedioTitleBean.getData().get(m-1).getId());
-            }
-
+            data.putString("tagId", vedioTitleBean.getData().get(m).getId());
             VideoDataFragment videoDataFragment = new VideoDataFragment();
             videoDataFragment.setArguments(data);
             mFragments.add(videoDataFragment);
         }
+
 
 
         viewpagerMain.setAdapter(new MainPagerAdapter(fragmentManager, mTitles, mFragments));

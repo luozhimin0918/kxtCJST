@@ -60,7 +60,7 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
         String url = UrlConstant.VIDEO_DATA_URL_ITEM;
 
         ConfigListVideo dataJson = new ConfigListVideo();
-        if(tagId.equals("000")){
+        if(tagId.equals("")){
             url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
         }else{
             dataJson.setCid(tagId);
@@ -131,7 +131,7 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                 Gson gson = new Gson();
                 String url = UrlConstant.VIDEO_DATA_URL_ITEM;
                 ConfigListVideo dataJson = new ConfigListVideo();
-                if(tagId.equals("000")){
+                if(tagId.equals("")){
                     url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
                 }else{
                     dataJson.setCid(tagId);
