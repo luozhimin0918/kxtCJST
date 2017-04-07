@@ -36,8 +36,12 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
     RelativeLayout relativeWelcome;
     @BindView(R.id.welcome_root)
     LinearLayout welcomeRoot;
+    @BindView(R.id.tioaguo)
+    ImageView tioaguo;
+
     private WelcomePersenter persenter;
     private AdConfigBean adConfigBean;
+
 
     private Handler handler = new Handler() {
         @Override
@@ -102,7 +106,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
         handler.sendEmptyMessage(1);
     }
 
-    @OnClick({R.id.image_welcome})
+    @OnClick({R.id.image_welcome,R.id.tioaguo})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_welcome:
@@ -113,6 +117,12 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
                 intent.putExtra("from", "welcome");
                 startActivity(intent);
                 finish();
+                break;
+            case R.id.tioaguo:
+                handler.removeMessages(1);
+                handler.removeMessages(0);
+                handler.sendEmptyMessage(0);
+
                 break;
 
         }

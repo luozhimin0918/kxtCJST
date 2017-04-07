@@ -17,7 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY" />
-
+        <ImageView
+            android:id="@+id/tioaguo"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/tiaoguo"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 
