@@ -50,16 +50,29 @@ public class DetailsActivity  extends CommunalActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_adweb:
-                finish();
-               /* if (from.equals("main") ||from.equals("news") ) {
+
+                if (from.equals("main")) {
                     finish();
                 } else {
-                    Intent intent = new Intent(this, FristActivity.class);
+                    finish();
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
-                }*/
+                }
 
                 break;
 
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (from.equals("main")) {
+            finish();
+        } else {
+            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 }

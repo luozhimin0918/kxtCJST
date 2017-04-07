@@ -3,21 +3,19 @@
     android:id="@+id/welcome_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@mipmap/welcome"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/relative_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/welcome_ad"
         android:visibility="gone">
 
         <ImageView
             android:id="@+id/image_welcome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="110dp"
             android:scaleType="fitXY" />
 
     </RelativeLayout>

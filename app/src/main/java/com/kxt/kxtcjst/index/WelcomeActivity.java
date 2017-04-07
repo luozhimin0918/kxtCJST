@@ -98,7 +98,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
     public void showAd(AdConfigBean adConfigBean) {
         KLog.d("showAd");
         this.adConfigBean = adConfigBean;
-        welcomeRoot.setBackgroundResource(R.mipmap.welcome_ad);
+//        welcomeRoot.setBackgroundResource(R.mipmap.welcome_ad);
         handler.sendEmptyMessage(1);
     }
 
@@ -106,6 +106,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_welcome:
+                handler.removeMessages(0);
                 Intent intent = new Intent(this, DetailsActivity.class);
                 intent.putExtra("url", adConfigBean.getData().getAdvertisement().getUrl());
                 intent.putExtra("title", adConfigBean.getData().getAdvertisement().getTitle());
