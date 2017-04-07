@@ -18,16 +18,26 @@ public class VedioBean implements Serializable{
 	 * data : [{"id":"471","title":"众鼎财富 加息落地 金银影响几何","picture":"http://img.kuaixun360.com/Uploads/Picture/2016-12-15/58523c5a38db8.jpg","istoutiao":"0","play_count":"15493","publish_time":"1481785500","category_id":"141","url":"http://appapi.kxt.com/video/view/id/471"},{"id":"469","title":"华尔街连线 如何赢在EIA","picture":"http://img.kuaixun360.com/Uploads/Picture/2016-12-14/5851000079533.jpg","istoutiao":"1","play_count":"11241","publish_time":"1481704200","category_id":"141","url":"http://appapi.kxt.com/video/view/id/469"}]
 	 */
 
-	private int code;
+	private int status;
 	private String msg;
+	private String aud;
+
 	private List<DataBean> data;
 
-	public int getCode() {
-		return code;
+	public String getAud() {
+		return aud;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
+	public void setAud(String aud) {
+		this.aud = aud;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public String getMsg() {

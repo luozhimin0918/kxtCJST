@@ -13,7 +13,7 @@ public class UrlConstant {
     public static final String AD_CONFIG_URL = BASE_URL + "app/pkx/config";//广告信息
 //    public static final String NEWS_AD_URL = BASE_URL + "pkx/ywSlide";//要闻头部广告
     public static final String VIDEO_DATA_URL_TITLE = BASE_URL +"cjst/nav";//&markid=476
-    public static final String VIDEO_DATA_URL_ITEM = "http://appapi.kxt.com/Video/list_video?num=10&cid=";//&markid=476
+    public static final String VIDEO_DATA_URL_ITEM = BASE_URL +"cjst/list_video";//&markid=476
 
 
     public static final String VIDEO_DATA_URL_ONE= "http://appapi.kxt.com/VideoCenter/getVideoNew";//&markid=476

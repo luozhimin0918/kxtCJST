@@ -32,18 +32,20 @@ public class IVideoDataModelImp implements IVideoDataModel {
     @Override
     public void getDateListData(final ObserverData<VedioBean> observerData, Map<String, String> map, String url) {
         RequestQueue requestQueue = dataPersenter.mView.getRequestQueue();
-        VolleyHttpUtil2 request = new VolleyHttpUtil2(dataPersenter.getContext(), requestQueue);
+        final VolleyHttpUtil2 request = new VolleyHttpUtil2(dataPersenter.getContext(), requestQueue);
         request.doGet(url, map, new VolleyHttpListener() {
             @Override
             public void onSuccess(String result) {
                 try {
-                /*    Claims claims = BaseUtils.parseJWT(result, UrlConstant.URL_PRIVATE_KEY);
+
+                 Claims claims = BaseUtils.parseJWT(result, UrlConstant.URL_PRIVATE_KEY);
+
                     ArrayList arrayList = (ArrayList) claims.get("data");
                     ArrayList<VedioBean.DataBean> dataBeens = new ArrayList<VedioBean.DataBean>();
                     VedioBean cjrlDataBean = new VedioBean();
                     cjrlDataBean.setMsg(claims.get("msg").toString());
-                    cjrlDataBean.setCode(Integer.parseInt(claims.get("code").toString()));
-//                    cjrlDataBean.setAud(claims.get("aud").toString());
+                    cjrlDataBean.setStatus(Integer.parseInt(claims.get("status").toString()));
+                    cjrlDataBean.setAud(claims.get("aud").toString());
                     for (int i = 0; i < arrayList.size(); i++) {
                         Map<String, String> map1 = (Map<String, String>) arrayList.get(i);
                         VedioBean.DataBean dataBean = new VedioBean.DataBean();
@@ -57,9 +59,9 @@ public class IVideoDataModelImp implements IVideoDataModel {
                         dataBean.setUrl(map1.get("url"));
                         dataBeens.add(dataBean);
                     }
-                    cjrlDataBean.setData(dataBeens);*/
+                    cjrlDataBean.setData(dataBeens);
 
-                    observerData.onCallback(JSON.parseObject(result,VedioBean.class));
+                    observerData.onCallback(cjrlDataBean);
 
 
                 } catch (Exception e) {

@@ -11,7 +11,7 @@ import com.kxt.kxtcjst.common.constant.UrlConstant;
 import com.kxt.kxtcjst.common.utils.BaseUtils;
 import com.kxt.kxtcjst.common.utils.ObserverData;
 import com.kxt.kxtcjst.index.adapter.VideoAdapter;
-import com.kxt.kxtcjst.index.jsonBean.ConfigJson;
+import com.kxt.kxtcjst.index.jsonBean.ConfigListVideo;
 import com.kxt.kxtcjst.index.jsonBean.VedioBean;
 import com.kxt.kxtcjst.index.model.IVideoDataModelImp;
 import com.kxt.kxtcjst.index.view.IVideoDataView;
@@ -57,8 +57,9 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
             return;
         }
         Map<String, String> map = new HashMap<>();
-        String url = UrlConstant.VIDEO_DATA_URL_ITEM+tagId;
-        ConfigJson dataJson = new ConfigJson();
+        String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+        ConfigListVideo dataJson = new ConfigListVideo();
+        dataJson.setCid(tagId);
         Gson gson = new Gson();
         try {
             map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
@@ -69,7 +70,7 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                     if (null != data) {
                         dataListview.onRefreshComplete();
                         KLog.json(JSON.toJSONString(data));
-                        if (data.getCode()==200) {
+                        if (data.getStatus()==1) {
                             if (null != data.getData() && data.getData().size() > 0) {
                                 //数据获取成功
                                 dataListview.post(new Runnable() {
@@ -121,19 +122,20 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
             try {
                 final Map<String, String> map = new HashMap<>();
                 Gson gson = new Gson();
-                String url = UrlConstant.VIDEO_DATA_URL_ITEM+tagId;
-                if(lastData!=null&&lastData.size()>5){
-                    url+="&markid="+lastData.get(lastData.size()-1).getId();
+                String url = UrlConstant.VIDEO_DATA_URL_ITEM;
+                ConfigListVideo dataJson=new ConfigListVideo();
+                if(lastData!=null&&lastData.size()>0){
+
+                    dataJson.setCid(tagId);
+                    dataJson.setMarkid(lastData.get(lastData.size()-1).getId());
                 }
-//                NewsMoreJson newsMoreJson = new NewsMoreJson();
-//                newsMoreJson.setNum("15");
-//                newsMoreJson.setMarkid(newsDataBeans.get(newsDataBeans.size() - 1).getId());
-                map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(new ConfigJson())));
+
+                map.put("content", BaseUtils.createJWT(UrlConstant.URL_PRIVATE_KEY, gson.toJson(dataJson)));
                 dataModelImp.getDateListData(new ObserverData<VedioBean>() {
                     @Override
                     public void onCallback(VedioBean data) {
                         super.onCallback(data);
-                        if (null != data && data.getCode()==200) {
+                        if (null != data && data.getStatus()==1) {
                             List<VedioBean.DataBean> databeas = data.getData();
                             KLog.json("videoDataPersenter More",JSON.toJSONString(data));
                             if(databeas!=null&&databeas.size()>0){
