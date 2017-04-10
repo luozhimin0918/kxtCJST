@@ -107,6 +107,7 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     AdConfigBean adConfigBean = new AdConfigBean();
                     AdConfigBean.DataBean adDataBean = new AdConfigBean.DataBean();
                     AdConfigBean.DataBean.AdvertisementBean advertisementBean = new AdConfigBean.DataBean.AdvertisementBean();
+                    AdConfigBean.DataBean.StartPage startPage = new AdConfigBean.DataBean.StartPage();
 
                     Claims claims = BaseUtils.parseJWT(result, UrlConstant.URL_PRIVATE_KEY);
                     adConfigBean.setStatus(claims.get("status").toString());
@@ -119,6 +120,13 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     advertisementBean.setType(adClaims.get("type").toString());
                     advertisementBean.setUrl(adClaims.get("url").toString());
                     adDataBean.setAdvertisement(advertisementBean);
+
+                    Map<String, Object> stClaims = (Map<String, Object>) dataClaims.get("startPage");
+                    startPage.setImageUrl(stClaims.get("imageUrl").toString());
+                    startPage.setTitle(stClaims.get("title").toString());
+//                    startPage.setType(stClaims.get("type").toString());
+                    startPage.setUrl(stClaims.get("url").toString());
+                    adDataBean.setStartPage(startPage);
                     adConfigBean.setData(adDataBean);
                     if (claims.get("status").toString().equals("1")) {
                         CjstApplicaion.getInstance().setAdConfigBean(adConfigBean);

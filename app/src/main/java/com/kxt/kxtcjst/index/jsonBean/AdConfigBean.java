@@ -75,6 +75,15 @@ public class AdConfigBean implements Serializable {
          */
 
         private AdvertisementBean Advertisement;
+        private StartPage startPage;
+
+        public StartPage getStartPage() {
+            return startPage;
+        }
+
+        public void setStartPage(StartPage startPage) {
+            this.startPage = startPage;
+        }
 
         public AdvertisementBean getAdvertisement() {
             return Advertisement;
@@ -100,6 +109,61 @@ public class AdConfigBean implements Serializable {
             @Override
             public String toString() {
                 return "AdvertisementBean{" +
+                        "Title='" + Title + '\'' +
+                        ", Type='" + Type + '\'' +
+                        ", ImageUrl='" + ImageUrl + '\'' +
+                        ", Url='" + Url + '\'' +
+                        '}';
+            }
+
+            public String getTitle() {
+                return Title;
+            }
+
+            public void setTitle(String Title) {
+                this.Title = Title;
+            }
+
+            public String getType() {
+                return Type;
+            }
+
+            public void setType(String Type) {
+                this.Type = Type;
+            }
+
+            public String getImageUrl() {
+                return ImageUrl;
+            }
+
+            public void setImageUrl(String ImageUrl) {
+                this.ImageUrl = ImageUrl;
+            }
+
+            public String getUrl() {
+                return Url;
+            }
+
+            public void setUrl(String Url) {
+                this.Url = Url;
+            }
+        }
+        public static class StartPage implements Serializable {
+            /**
+             * Title : 测试
+             * Type : normal
+             * ImageUrl : http://pic.qiantucdn.com/58pic/11/79/85/13t58PICsap.jpg
+             * Url : https://www.baidu.com
+             */
+
+            private String Title;
+            private String Type;
+            private String ImageUrl;
+            private String Url;
+
+            @Override
+            public String toString() {
+                return "StartPage{" +
                         "Title='" + Title + '\'' +
                         ", Type='" + Type + '\'' +
                         ", ImageUrl='" + ImageUrl + '\'' +
