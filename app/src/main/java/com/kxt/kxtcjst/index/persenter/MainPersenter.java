@@ -207,6 +207,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                     for (int i = 0; i < contents.length; i++) {
                         content += contents[i] + "\n";
                     }
+                    content=content.replace("<br>","\n");
                     textContent.setText(content);
                     updateClose.setOnClickListener(this);
                     textUpdate.setOnClickListener(this);
