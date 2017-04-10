@@ -159,7 +159,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                             0);
                 }
 
-            } else {
+            } else  if(adBean.getData().getAdvertisement().getType().equals("webView")){//webView
                 webRelatve.setVisibility(View.VISIBLE);
                 if (adBean.getData().getAdvertisement().getUrl() != null && !"".equals(adBean.getData().getAdvertisement().getUrl())
                         && adBean.getData().getAdvertisement().getUrl().startsWith("http")) {
@@ -260,7 +260,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                     Uri uriD = Uri.parse(adMode);
                     Intent intentD = new Intent(Intent.ACTION_VIEW, uriD);
                     getContext().startActivity(intentD);
-                }else{
+                }else if(adMode!=null&&adMode.equals("normal")){
                     Intent in = new Intent(getContext(), DetailsActivity.class);
                     in.putExtra("url", adUrl);
                     in.putExtra("from", "main");

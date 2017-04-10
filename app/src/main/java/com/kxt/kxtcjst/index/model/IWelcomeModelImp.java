@@ -124,7 +124,7 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     Map<String, Object> stClaims = (Map<String, Object>) dataClaims.get("startPage");
                     startPage.setImageUrl(stClaims.get("imageUrl").toString());
                     startPage.setTitle(stClaims.get("title").toString());
-//                    startPage.setType(stClaims.get("type").toString());
+                    startPage.setType(stClaims.get("type").toString());
                     startPage.setUrl(stClaims.get("url").toString());
                     adDataBean.setStartPage(startPage);
                     adConfigBean.setData(adDataBean);

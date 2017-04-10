@@ -58,7 +58,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
                     handler.removeMessages(0);
                     relativeWelcome.setVisibility(View.VISIBLE);
                     Glide.with(getContext())
-                            .load(adConfigBean.getData().getAdvertisement().getImageUrl())
+                            .load(adConfigBean.getData().getStartPage().getImageUrl())
                             .asBitmap()
                             .into(new SimpleTarget<Bitmap>() {
                                 @Override
@@ -112,8 +112,8 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
             case R.id.image_welcome:
                 handler.removeMessages(0);
                 Intent intent = new Intent(this, DetailsActivity.class);
-                intent.putExtra("url", adConfigBean.getData().getAdvertisement().getUrl());
-                intent.putExtra("title", adConfigBean.getData().getAdvertisement().getTitle());
+                intent.putExtra("url", adConfigBean.getData().getStartPage().getUrl());
+                intent.putExtra("title", adConfigBean.getData().getStartPage().getTitle());
                 intent.putExtra("from", "welcome");
                 startActivity(intent);
                 finish();

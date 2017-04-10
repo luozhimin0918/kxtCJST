@@ -105,7 +105,7 @@ public class WelcomePersenter extends CommunalPresenter<IWelcomeView> {
                     super.onCallback(data);
                     KLog.json(JSON.toJSONString(data));
                     if (null != data && data.getStatus().equals("1")) {
-                        if (data.getData().getAdvertisement().getType().equals("normal")) {
+                        if (data.getData().getStartPage().getType().equals("startPage")) {
                             mView.showAd(data);
                             KLog.d("mView.showAd");
                         } else {
