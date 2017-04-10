@@ -12,11 +12,23 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/image_welcome"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY" />
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/image_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:src="@mipmap/welcome_ad"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/tioaguo"
             android:layout_alignParentRight="true"
