@@ -21,7 +21,7 @@ import com.socks.library.KLog;
 
 import butterknife.BindView;
 
-public class MainActivity extends CommunalActivity implements IMainView {
+public class MainActivity extends CommunalActivity implements IMainView, PageLoadLayout.OnAfreshLoadListener {
     @BindView(R.id.page_load)
     PageLoadLayout pageLoad;
     private MainPersenter mainPersenter;
@@ -41,6 +41,7 @@ public class MainActivity extends CommunalActivity implements IMainView {
         setBindingView(R.layout.activity_main);
         mainPersenter = new MainPersenter();
         mainPersenter.attach(this);
+        pageLoad.setOnAfreshLoadListener(this);
         mainPersenter.getSpTitlePer(pageLoad);
     }
 
@@ -90,5 +91,10 @@ public class MainActivity extends CommunalActivity implements IMainView {
 
 
         }
+    }
+
+    @Override
+    public void OnAfreshLoad() {
+        mainPersenter.getSpTitlePer(pageLoad);
     }
 }
