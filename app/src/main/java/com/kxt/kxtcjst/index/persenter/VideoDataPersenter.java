@@ -146,9 +146,10 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                     @Override
                     public void onCallback(VedioBean data) {
                         super.onCallback(data);
-                        if (null != data && data.getStatus()==1) {
+                        KLog.json("videoDataPersenter More",JSON.toJSONString(data));
+                        if (null != data && data.getStatus()==1||data.getStatus()==2) {
                             List<VedioBean.DataBean> databeas = data.getData();
-                            KLog.json("videoDataPersenter More",JSON.toJSONString(data));
+
                             if(databeas!=null&&databeas.size()>0){
                                 lastData.addAll(databeas);
                                 videoAdapter.notifyDataSetChanged();
