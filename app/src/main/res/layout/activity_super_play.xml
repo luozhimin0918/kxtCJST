@@ -14,7 +14,7 @@
     <com.superplayer.library.SuperPlayer
         android:id="@+id/view_super_player"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         ></com.superplayer.library.SuperPlayer>
         <ImageView
             android:id="@+id/back_but_play"
