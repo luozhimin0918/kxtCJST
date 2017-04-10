@@ -60,11 +60,11 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
         String url = UrlConstant.VIDEO_DATA_URL_ITEM;
 
         ConfigListVideo dataJson = new ConfigListVideo();
-        if(tagId.equals("")){
-            url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
-        }else{
+//        if(tagId.equals("")){
+//            url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
+//        }else{
             dataJson.setCid(tagId);
-        }
+//        }
 
 
         Gson gson = new Gson();
@@ -77,7 +77,7 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                     if (null != data) {
                         dataListview.onRefreshComplete();
                         KLog.json(JSON.toJSONString(data));
-                        if (data.getStatus()==1) {
+                        if (data.getStatus()==1||data.getStatus()==2) {
                             if (null != data.getData() && data.getData().size() > 0) {
                                 //数据获取成功
                                 dataListview.post(new Runnable() {
@@ -131,11 +131,13 @@ public class VideoDataPersenter extends CommunalPresenter<IVideoDataView> {
                 Gson gson = new Gson();
                 String url = UrlConstant.VIDEO_DATA_URL_ITEM;
                 ConfigListVideo dataJson = new ConfigListVideo();
-                if(tagId.equals("")){
-                    url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
-                }else{
+
+
+//                if(tagId.equals("")){
+//                    url=UrlConstant.VIDEO_DATA_URL_ITEM_TUIJIAN;
+//                }else{
                     dataJson.setCid(tagId);
-                }
+//                }
                 if(lastData!=null&&lastData.size()>0){
 
                     dataJson.setMarkid(lastData.get(lastData.size()-1).getId());
