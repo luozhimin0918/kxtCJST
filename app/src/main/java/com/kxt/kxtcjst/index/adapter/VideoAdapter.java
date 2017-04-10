@@ -90,7 +90,7 @@ public class VideoAdapter extends BaseAdapter {
                 });
 
         viewHolder.sp_times.setText(dataBeans.get(position).getPlay_count());
-       String tags =  dataBeans.get(position).getCategory_id();
+       String tags =  dataBeans.get(position).getCate_name();
         viewHolder.news_tab.removeAllViews();
 
             MyTabView myTabView = new MyTabView(context);

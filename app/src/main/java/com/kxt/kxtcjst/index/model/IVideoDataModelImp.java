@@ -54,6 +54,7 @@ public class IVideoDataModelImp implements IVideoDataModel {
                         dataBean.setTitle(map1.get("title"));
                         dataBean.setIstoutiao(map1.get("istoutiao"));
                         dataBean.setPicture(map1.get("picture"));
+                        dataBean.setCate_name(map1.get("cate_name"));
                         dataBean.setPlay_count(map1.get("play_count"));
                         dataBean.setPublish_time(map1.get("publish_time"));
                         dataBean.setUrl(map1.get("url"));

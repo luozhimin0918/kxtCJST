@@ -93,7 +93,7 @@ public class VideoListAdapter extends BaseAdapter {
                     }
                 });
 
-       String tags =  dataBeans.get(position).getCategory_id();
+       String tags =  dataBeans.get(position).getCate_name();
         viewHolder.news_tab.removeAllViews();
 
             MyTabView myTabView = new MyTabView(context);

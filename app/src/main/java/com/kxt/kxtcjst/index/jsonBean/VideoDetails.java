@@ -197,6 +197,15 @@ public class VideoDetails implements Serializable{
 			private String category_id;
 			private String play_count;
 			private String description;
+			private String cate_name;
+
+			public String getCate_name() {
+				return cate_name;
+			}
+
+			public void setCate_name(String cate_name) {
+				this.cate_name = cate_name;
+			}
 
 			public String getId() {
 				return id;

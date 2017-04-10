@@ -78,6 +78,7 @@ public class IVideoPlayModelImp implements IVideoPlayModel {
                         listBean.setPublish_time(map1.get("publish_time").toString());
                         listBean.setPlay_count(map1.get("play_count").toString());
                         listBean.setCategory_id(map1.get("category_id").toString());
+                        listBean.setCate_name(map1.get("cate_name"));
                         listBeanList.add(listBean);
 
                     }

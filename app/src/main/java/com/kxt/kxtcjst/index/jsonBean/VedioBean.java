@@ -76,6 +76,15 @@ public class VedioBean implements Serializable{
 		private String publish_time;
 		private String category_id;
 		private String url;
+		private String cate_name;
+
+		public String getCate_name() {
+			return cate_name;
+		}
+
+		public void setCate_name(String cate_name) {
+			this.cate_name = cate_name;
+		}
 
 		public String getId() {
 			return id;
