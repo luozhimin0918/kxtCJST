@@ -58,6 +58,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
     public PopupWindowUtils popupWindowUtils;
     private String adUrl;
     private String adMode;
+    private String upDownUrl;
     private SlidingTabLayout tabMain;
     private ArrayList<CustomTabEntity> mTabs = new ArrayList<>();
     private ViewPager viewpagerMain;
@@ -207,6 +208,7 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                     for (int i = 0; i < contents.length; i++) {
                         content += contents[i] + "\n";
                     }
+                    upDownUrl=updateBean.getData().getDownloadUrl();
                     content=content.replace("<br>","\n");
                     textContent.setText(content);
                     updateClose.setOnClickListener(this);
@@ -243,11 +245,14 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                 break;
             case R.id.upate_update:
                 popupWindowUtils.dismiss();
-                Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+                if(upDownUrl!=null&&upDownUrl.startsWith("http")){
+                    Uri uriUp = Uri.parse(upDownUrl);
+ //                Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
 //                Uri uri = Uri.parse("market://details?id=com.jyh.kxt");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(intent);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uriUp);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
                 break;
             case R.id.ad_bg:
                 popupWindowUtils.dismiss();
