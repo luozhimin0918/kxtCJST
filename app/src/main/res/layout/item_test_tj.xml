@@ -30,7 +30,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:background="@mipmap/play_item"
+                android:background="@mipmap/sp_play"
                 android:visibility="visible" />
          </FrameLayout>
 
