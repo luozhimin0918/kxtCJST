@@ -50,7 +50,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="金一个赢一个"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text=""
                 android:layout_toLeftOf="@+id/showtime_linear"
                 android:paddingLeft="12dp"
                 android:textColor="#5E6C75"
@@ -81,7 +83,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="2dp"
                     android:gravity="center_vertical"
-                    android:text="111111"
+                    android:text=""
                     android:textColor="#B8C4CC"
                     android:textSize="13sp" />
             </LinearLayout>

@@ -27,7 +27,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
-public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView, SuperPlayer.OnNetChangeListener {
+public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayView, SuperPlayer.OnNetChangeListener, PageLoadLayout.OnAfreshLoadListener  {
 
 
     SuperPayPersenter superPayPersenter;
@@ -70,6 +70,7 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
                 finish();
             }
         });
+        pageLoad.setOnAfreshLoadListener(this);
         superPayPersenter.getPlayIdVideoData(pageLoad, playId);
 //        mainPersenter.initViewPager(viewpagerMain, getSupportFragmentManager());
     }
@@ -259,5 +260,10 @@ public class SuperPlayerActivity extends CommunalActivity implements ISuperPlayV
     @Override
     public void onNoAvailable() {
 
+    }
+
+    @Override
+    public void OnAfreshLoad() {
+        superPayPersenter.getPlayIdVideoData(pageLoad, playId);
     }
 }
