@@ -57,6 +57,7 @@ import java.util.regex.Pattern;
 public class MainPersenter extends CommunalPresenter<IMainView>  implements View.OnClickListener  {
     public PopupWindowUtils popupWindowUtils;
     private String adUrl;
+    private String adMode;
     private SlidingTabLayout tabMain;
     private ArrayList<CustomTabEntity> mTabs = new ArrayList<>();
     private ViewPager viewpagerMain;
@@ -139,8 +140,9 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
         WebView webView = (WebView) adPopView.findViewById(R.id.ad_webview);
         ImageView webClose = (ImageView) adPopView.findViewById(R.id.web_close);
         if (adBean.getStatus().equals("1")) {
-            if (adBean.getData().getAdvertisement().getType().equals("normal")) {
+            if (adBean.getData().getAdvertisement().getType().equals("normal")||adBean.getData().getAdvertisement().getType().equals("download")) {
                 adUrl = adBean.getData().getAdvertisement().getUrl();
+                adMode=adBean.getData().getAdvertisement().getType();
                 if (adUrl.startsWith("http")) {
                     imgRelatve.setVisibility(View.VISIBLE);
                     Glide.with(getContext())
@@ -248,10 +250,17 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                 break;
             case R.id.ad_bg:
                 popupWindowUtils.dismiss();
-                Intent in = new Intent(getContext(), DetailsActivity.class);
-                in.putExtra("url", adUrl);
-                in.putExtra("from", "main");
-                getContext().startActivity(in);
+                if(adMode!=null&&adMode.equals("download")){
+                    Uri uriD = Uri.parse(adMode);
+                    Intent intentD = new Intent(Intent.ACTION_VIEW, uriD);
+                    getContext().startActivity(intentD);
+                }else{
+                    Intent in = new Intent(getContext(), DetailsActivity.class);
+                    in.putExtra("url", adUrl);
+                    in.putExtra("from", "main");
+                    getContext().startActivity(in);
+                }
+
                 break;
         }
     }
