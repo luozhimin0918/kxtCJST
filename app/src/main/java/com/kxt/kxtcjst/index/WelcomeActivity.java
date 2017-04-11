@@ -103,7 +103,7 @@ public class WelcomeActivity extends CommunalActivity implements IWelcomeView {
         KLog.d("showAd");
         this.adConfigBean = adConfigBean;
 //        welcomeRoot.setBackgroundResource(R.mipmap.welcome_ad);
-        handler.sendEmptyMessage(1);
+        handler.sendEmptyMessageDelayed(1,1000);
     }
 
     @OnClick({R.id.image_welcome,R.id.tioaguo})
