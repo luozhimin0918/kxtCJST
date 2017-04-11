@@ -10,6 +10,7 @@ import com.kxt.kxtcjst.index.jsonBean.UpdateBean;
 import com.kxt.kxtcjst.index.persenter.WelcomePersenter;
 import com.library.util.volley.VolleyHttpListener;
 import com.library.util.volley.VolleyHttpUtil2;
+import com.socks.library.KLog;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -66,6 +67,7 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     UpdateBean updateBean = new UpdateBean();
                     UpdateBean.DataBean updateData = new UpdateBean.DataBean();
                     Claims claims = BaseUtils.parseJWT(result, UrlConstant.URL_PRIVATE_KEY);
+                    KLog.d(claims.toString());
                     updateBean.setMsg(claims.get("msg").toString());
                     updateBean.setAud(claims.get("aud").toString());
                     updateBean.setStatus(claims.get("status").toString());
@@ -110,6 +112,7 @@ public class IWelcomeModelImp implements IWelcomeModel {
                     AdConfigBean.DataBean.StartPage startPage = new AdConfigBean.DataBean.StartPage();
 
                     Claims claims = BaseUtils.parseJWT(result, UrlConstant.URL_PRIVATE_KEY);
+                    KLog.d(claims.toString());
                     adConfigBean.setStatus(claims.get("status").toString());
                     adConfigBean.setAud(claims.get("aud").toString());
                     adConfigBean.setMsg(claims.get("msg").toString());
