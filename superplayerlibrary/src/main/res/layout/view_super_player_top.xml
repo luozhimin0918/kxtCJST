@@ -5,7 +5,14 @@
     android:layout_height="45dp"
     android:orientation="horizontal"
     android:visibility="gone" >
-
+<LinearLayout
+    android:id="@+id/bgSup"
+    android:visibility="gone"
+    android:orientation="horizontal"
+    android:background="#88000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</LinearLayout>
     <ImageView
         android:id="@+id/app_video_finish"
         android:layout_width="40dp"

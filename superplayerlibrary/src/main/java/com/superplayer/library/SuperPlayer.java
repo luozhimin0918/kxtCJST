@@ -1050,10 +1050,12 @@ public class SuperPlayer extends RelativeLayout {
                     R.drawable.shrink_video);
             $.id(R.id.app_video_finish).visibility(VISIBLE);
             $.id(R.id.app_video_title).visibility(VISIBLE);
+            $.id(R.id.bgSup).visibility(VISIBLE);
         } else {
             $.id(R.id.view_jky_player_fullscreen).image(R.drawable.enlarge_video);
             $.id(R.id.app_video_finish).visibility(VISIBLE);
             $.id(R.id.app_video_title).visibility(GONE);
+            $.id(R.id.bgSup).visibility(GONE);
         }
     }
 
