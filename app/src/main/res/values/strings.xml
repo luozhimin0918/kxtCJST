@@ -3,4 +3,5 @@
     <string name="no_video_data">亲，暂无数据！</string>
     <string name="load_nonet">亲，网络出错了！</string>
     <string name="load_err">亲，数据加载出错了！</string>
+    <string name="yihuozaishou"><u>以后再说</u></string>
 </resources>
