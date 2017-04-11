@@ -256,8 +256,8 @@ public class MainPersenter extends CommunalPresenter<IMainView>  implements View
                 break;
             case R.id.ad_bg:
                 popupWindowUtils.dismiss();
-                if(adMode!=null&&adMode.equals("download")){
-                    Uri uriD = Uri.parse(adMode);
+                if(adMode!=null&&adMode.equals("download")&&adUrl!=null&&adUrl.startsWith("http")){
+                    Uri uriD = Uri.parse(adUrl);
                     Intent intentD = new Intent(Intent.ACTION_VIEW, uriD);
                     getContext().startActivity(intentD);
                 }else if(adMode!=null&&adMode.equals("normal")){
