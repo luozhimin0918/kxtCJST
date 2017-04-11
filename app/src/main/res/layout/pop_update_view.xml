@@ -105,7 +105,7 @@
                         android:layout_marginLeft="25dp"
                         android:layout_marginRight="25dp"
                         android:layout_marginTop="5dp"
-                        android:text="更新类容："
+                        android:text="更新内容："
                         android:textColor="@color/font_6"
                         android:textSize="13sp" />
 
@@ -119,7 +119,9 @@
                         android:lineSpacingExtra="10dp"
                         android:text=""
                         android:textColor="@color/font_8"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
+
+
 
                 </LinearLayout>
             </ScrollView>
@@ -136,7 +138,7 @@
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/close_yihuo"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/upate_update"
