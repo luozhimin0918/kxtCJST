@@ -24,6 +24,10 @@
         android:name=".CjstApplicaion"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:value="58ed8f22c62dca0a2c002c58" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="kxtCjstApp" android:name="UMENG_CHANNEL"/>
+
         <activity android:name=".index.WelcomeActivity"
             android:theme="@style/Theme.Start">
             <intent-filter>
