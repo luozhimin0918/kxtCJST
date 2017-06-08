@@ -17,6 +17,14 @@ android {
             exclude 'META-INF/NOTICE'
         }
     }
+    signingConfigs {
+        config {
+            keyAlias 'cjst'
+            keyPassword 'cjst108'
+            storeFile file('E:/AndroidStudioGit/kxtCJST/app/cjst.jks')
+            storePassword 'cjst108'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
